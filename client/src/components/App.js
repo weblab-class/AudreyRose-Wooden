@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { Component, useState, useEffect } from "react";
 import { Router } from "@reach/router";
 import NotFound from "./pages/NotFound.js";
-import NavBar from "./pages/NavBar.js"
+import NavBar from "./modules/NavBar.js"
 import Feed from "./pages/Feed.js";
 import Club from "./pages/Club.js";
 import Inbox from "./pages/Inbox.js";
@@ -15,19 +15,25 @@ import { get, post } from "../utilities";
 /**
  * Define the "App" component
  */
-const App = () => {
-  const [userId, setUserId] = useState(undefined);
+class App extends Component {
+  // makes props available in this component
+ constructor(props) {
+   super(props);
+   this.state = {
+     userId: undefined,
+   };
+ }
 
-  useEffect(() => {
-    get("/api/whoami").then((user) => {
-      if (user._id) {
-        // they are registed in the database, and currently logged in.
-        setUserId(user._id);
-      }
-    });
-  }, []);
+ componentDidMount() {
+   get("/api/whoami").then((user) => {
+     if (user._id) {
+       // they are registed in the database, and currently logged in.
+       this.setState({ userId: user._id });
+     }
+   });
+ }
 
-  const handleLogin = (res) => {
+  handleLogin = (res) => {
     console.log(`Logged in as ${res.profileObj.name}`);
     const userToken = res.tokenObj.id_token;
     post("/api/login", { token: userToken }).then((user) => {
@@ -36,13 +42,13 @@ const App = () => {
     });
   };
 
-  const handleLogout = () => {
+  handleLogout = () => {
     setUserId(undefined);
     post("/api/logout");
   };
 
   // TODO: insert NavBar logic
-  render(){
+  render() {
     return (
       <>
         <NavBar
@@ -51,13 +57,13 @@ const App = () => {
           userId={this.state.userId}
         />
         <Router>
-          <Feed path="/:userId" />
+          <Feed path="/" userId={this.state.userId}/>
           <Club path="/club/" userId={this.state.userId}  />
           <Inbox path="/inbox/" userId={this.state.userId}/>
           <NotFound default />
         </Router>
       </>
-    )
+    );
   }
 }
 

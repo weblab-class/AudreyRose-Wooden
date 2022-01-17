@@ -104,3 +104,4 @@ class NewBook extends Component {
     return <NewBookInput title="Book Title" author="Author" isbn="ISBN" onSubmit={this.addBook} />;
   }
 }
+ export { NewBook };

@@ -18,19 +18,18 @@ import "../../utilities.css";
  * @param {string} location user who has it now
  */
 
-const Card extends Component {
+class Card extends Component {
   constructor(props) {
     super(props);
   }
   // declare state varibales and JS calculations
   // TODO: retrieve individual book details
-  const [bookDetails, setBookDetails] = useState(undefined)
-  useEffect(() => {
+  componentDidMount() {
     get("/api/book").then((book) => {
       setBookDetails(book);
       console.log(book);
     });
-  });
+  }
 
   render(){
     return(
@@ -49,3 +48,5 @@ const Card extends Component {
     );
   }
 }
+
+export default Card;

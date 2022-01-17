@@ -1,4 +1,4 @@
-import React, { Component }, { useState } from "react";
+import React, { Component , useState } from "react";
 import Profile from "../modules/Profile.js"
 
 const SideBar = () => {

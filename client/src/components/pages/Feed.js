@@ -1,4 +1,4 @@
-import React, { Component }, { useState } from "react";
+import React, { Component , useState } from "react";
 import GoogleLogin, { GoogleLogout } from "react-google-login";
 import SideBar from "./SideBar.js"
 import Card from "../modules/Card.js"
@@ -7,7 +7,7 @@ import { NewBook } from "../modules/NewBookInput.js";
 import "../../utilities.css";
 import "./Feed.css";
 
-vlass Feed extends Component {
+class Feed extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -26,7 +26,7 @@ vlass Feed extends Component {
   }
 
   // TODO: retrieve profile object
-
+/**
   const [userObj, setUserObj] = useState(undefined);
   useEffect(() => {
     get("/api/profile").then((myprofile) => {
@@ -34,7 +34,7 @@ vlass Feed extends Component {
       console.log(myprofile);
     });
   });
-  const user = userObj;
+  const user = userObj;*/
 
   // this gets called when the user pushes "Submit", so their
  // book gets added to the screen right away
