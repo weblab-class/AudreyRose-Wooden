@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Router } from "@reach/router";
 import NotFound from "./pages/NotFound.js";
-import Profile from "./pages/Profile.js";
+import Feed from "./pages/Feed.js";
 //import Club from "./pages/Club.js";
 //import Inbox from "./pages/Inbox.js";
 
