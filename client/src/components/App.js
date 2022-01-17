@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Router } from "@reach/router";
 import NotFound from "./pages/NotFound.js";
+import NavBar from "./pages/NavBar.js"
 import Feed from "./pages/Feed.js";
+//import SideBar from "./pages/SideBar.js";
 //import Club from "./pages/Club.js";
 //import Inbox from "./pages/Inbox.js";
 
@@ -44,9 +46,11 @@ const App = () => {
 
   return (
     <>
+      <NavBar />
       <Router>
       // TODO include new pages here, path goes to different js file ex: profile, book, club, inbox?
-        <Profile path="/" handleLogin={handleLogin} handleLogout={handleLogout} userId={userId} />
+        <Feed path="/" handleLogin={handleLogin} handleLogout={handleLogout} userId={userId} />
+      // <SideBar path="/" handleLogin={handleLogin} handleLogout={handleLogout} userId={userId} />
       // <Club path="/" handleLogin={handleLogin} handleLogout={handleLogout} userId={userId} />
       // <Inbox path="/" handleLogin={handleLogin} handleLogout={handleLogout} userId={userId} />
         <NotFound default />

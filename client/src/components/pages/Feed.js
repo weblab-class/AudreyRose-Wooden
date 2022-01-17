@@ -1,5 +1,7 @@
 import React, { Component }, { useState } from "react";
 import GoogleLogin, { GoogleLogout } from "react-google-login";
+import SideBar from "./SideBar.js"
+import Card from "../modules/Card.js"
 
 import "../../utilities.css";
 import "./Feed.css";
@@ -45,12 +47,10 @@ const Feed = ({ userId, handleLogin, handleLogout }) => {
       )}
       // TODO: create user page before displaying user details?
       <div>
-      // TODO: handle displaying profile compononents:
-      // profile details, (SIDEBAR)
-      </div>
-      <div>
       // TODO: handle displaying user's library:
       // components of library == Card: book info
+      <Card />
+      <SideBar />
       </div>
     </>
   );
