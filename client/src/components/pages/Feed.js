@@ -28,32 +28,32 @@ const Feed = ({ userId, handleLogin, handleLogout }) => {
   });
   const user = userObj;
 
-  return (
-    <>
-      {userId ? (
-        <GoogleLogout
-          clientId={GOOGLE_CLIENT_ID}
-          buttonText="Logout"
-          onLogoutSuccess={handleLogout}
-          onFailure={(err) => console.log(err)}
-        />
-      ) : (
-        <GoogleLogin
-          clientId={GOOGLE_CLIENT_ID}
-          buttonText="Login"
-          onSuccess={handleLogin}
-          onFailure={(err) => console.log(err)}
-        />
-      )}
-      // TODO: create user page before displaying user details?
-      <div>
-      // TODO: handle displaying user's library:
-      // components of library == Card: book info
-      <Card />
-      <SideBar />
-      </div>
-    </>
-  );
+  render() {
+     let bookList = null;
+     const hasBooks = this.state.mybooks.length !== 0;
+     if (hasBooks) {
+       bookList = this.state.mybooks.map((bookObj) => (
+         <Card // TODO: edit this
+           key={`Card_${bookObj._id}`}
+           _id={bookObj.props._id}
+           owner={bookObj.props.owner}
+           title={bookObj.props.title}
+           author={bookObj.props.author}
+           isbn={bookObj.props.isbn}
+           borrowed={bookObj.props.borrowed}
+           location={bookObj.props.location}
+           userId={this.props.userId}
+         />
+       ));
+     } else {
+       bookList = <div>Empty library!</div>;
+     }
+     return (
+       <>
+
+       </>
+     );
+   }
 };
 
 export default Feed;

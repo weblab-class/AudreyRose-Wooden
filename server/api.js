@@ -115,7 +115,7 @@ router.post("/addbook", (req, res) => {
     isbn: req.body.isbn,
     borrowed: req.body.borrowed,
     location: req.body.location,
-    borrowers: req.body.borrowers,
+//    borrowers: req.body.borrowers,
   });
 
   newBook.save().then((book) => res.send(book));
