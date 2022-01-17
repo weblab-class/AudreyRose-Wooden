@@ -35,6 +35,9 @@ router.get("/whoami", (req, res) => {
 
   res.send(req.user);
 });
+router.get("/test", (req, res) => {
+  res.send({message: "it works"});
+});
 
 router.post("/initsocket", (req, res) => {
   // do nothing if user not logged in
@@ -45,6 +48,8 @@ router.post("/initsocket", (req, res) => {
 // |------------------------------|
 // | write your API methods below!|
 // |------------------------------|
+
+// TODO: fix the find filtering, cannnot read properties of undefined (reading '_id')
 
 // USER APIS
 router.post("/create", (req, res) => {
@@ -76,9 +81,9 @@ router.post("/addclub", (req, res) => {
 });
 
 router.get("/club", (req, res) => { //find a club that requester is part of
-  Club.find({req.user._id: {$in: req.body.members}}).then((club) => {
-    res.send(club);
-  });
+  //Club.find({req.user._id: {$in: req.body.members}}).then((club) => {
+  //  res.send(club);
+  //});
 });
 
 /**router.post("/addmember", (req, res) => { //find one club by unique id and add a new member
@@ -101,9 +106,9 @@ router.patch("/addmember", (req, res) => {
 
 // LIBRARY APIS
 router.get("/library", (req, res) => {
-  UserLibrary.find({owner._id: req.user._id}).then((library) => {
-    res.send(library);
-  });
+  //UserLibrary.find({owner._id: req.user._id}).then((library) => {
+  //  res.send(library);
+  //});
 });
 
 // BOOK APIS
@@ -137,9 +142,9 @@ router.post("/borrow", (req, res) => {
 });
 
 router.get("/inbox", (req, res) => { //find all borrow requests
-  BorrowReq.find({owner._id: req.user._id}).then((response) => { //owner _id = user _id
-    res.send(response);
-  });
+  //BorrowReq.find({owner._id: req.user._id}).then((response) => { //owner _id = user _id
+  //  res.send(response);
+  //});
 });
 
 // anything else falls to this "not found" case

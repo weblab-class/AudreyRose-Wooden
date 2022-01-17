@@ -1,12 +1,12 @@
 const mongoose = require("mongoose");
 
 const BookSchema = new mongoose.Schema({
-  owner: ObjectId, //unique user id
+  owner: String, //unique user id
   title: String,
   author: String,
   isbn: String,
   borrowed: Boolean, //currently borrowed T/F
-  location: ObjectId, //user who has it right now
+  location: String, //user who has it right now
   //borrowers: [ObjectId], //array of user ids who have borrowed
 });
 

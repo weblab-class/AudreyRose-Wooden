@@ -1,8 +1,8 @@
 const mongoose = require("mongoose");
 
 const LibrarySchema = new mongoose.Schema({
-  owner: ObjectId, //unique user id
-  mybooks: [ObjectId], //array of book id
+  owner: String, //unique user id
+  mybooks: [String], //array of book id
 });
 
 // compile model from schema

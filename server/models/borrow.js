@@ -1,9 +1,9 @@
 const mongoose = require("mongoose");
 
 const BorrowSchema = new mongoose.Schema({
-  borrower: ObjectId, //sending request from, unique user id
-  owner: ObjectId, //sending request to, unique user id
-  bookid: ObjectId,
+  borrower: String, //sending request from, unique user id
+  owner: String, //sending request to, unique user id
+  bookid: String,
 });
 
 // compile model from schema

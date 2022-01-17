@@ -47,7 +47,6 @@ class App extends Component {
     post("/api/logout");
   };
 
-  // TODO: insert NavBar logic
   render() {
     return (
       <>
@@ -56,12 +55,14 @@ class App extends Component {
           handleLogout={this.handleLogout}
           userId={this.state.userId}
         />
+        /**<div className="App-container">
         <Router>
           <Feed path="/" userId={this.state.userId}/>
           <Club path="/club/" userId={this.state.userId}  />
           <Inbox path="/inbox/" userId={this.state.userId}/>
           <NotFound default />
         </Router>
+        </div>*/
       </>
     );
   }
