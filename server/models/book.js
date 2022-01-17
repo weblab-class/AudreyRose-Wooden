@@ -5,8 +5,9 @@ const BookSchema = new mongoose.Schema({
   title: String,
   author: String,
   isbn: String,
-  location: ObjectId, //current borrower
-  borrowers: [ObjectId] //array of user ids who have borrowed
+  borrowed: Boolean, //currently borrowed T/F
+  location: ObjectId, //user who has it right now
+  borrowers: [ObjectId], //array of user ids who have borrowed
 });
 
 // compile model from schema
