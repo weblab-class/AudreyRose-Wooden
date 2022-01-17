@@ -46,8 +46,6 @@ router.post("/initsocket", (req, res) => {
 // | write your API methods below!|
 // |------------------------------|
 
-// TODO: check find for backend functions
-
 // USER APIS
 router.post("/create", (req, res) => {
   const newUser = new User({
@@ -94,6 +92,7 @@ router.get("/club", (req, res) => { //find a club that requester is part of
 });*/
 
 router.patch("/addmember", (req, res) => {
+  //parameter would need new members list (get old, add new, then patch)
   const newMembers = Club.findByIdAndUpdate(req.params._id, req.body, {new: true});
   console.log(req.params);
   console.log(newMembers);
@@ -134,7 +133,6 @@ router.post("/borrow", (req, res) => {
     owner: req.body.owner,
     bookid: req.body.bookid,
   });
-// TODO: logic to update book detail w/ borrowed or not
   newBorrowReq.save().then((borrowReq) => res.send(borrowReq));
 });
 
