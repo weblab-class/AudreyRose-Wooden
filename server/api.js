@@ -13,6 +13,8 @@ const express = require("express");
 const User = require("./models/user");
 const UserLibrary = require("./models/library");
 const Book = require("./models/book");
+const Club = require("./models/club");
+const BorrowReq = require("./models/borrow");
 
 // import authentication library
 const auth = require("./auth");
@@ -64,9 +66,42 @@ router.get("/profile", (req, res) => {
   });
 });
 
+router.post("/addclub", (req, res) => {
+  const newClub = new Club({
+    admin: req.user._id,
+    members: req.body.members,
+  });
+
+  newClub.save().then((club) => res.send(club));
+});
+
+router.get("/club", (req, res) => { //find a club that requester is part of
+  Club.find({req.user._id: {$in: req.body.members}}).then((club) => {
+    res.send(club);
+  });
+});
+
+/**router.post("/addmember", (req, res) => { //find one club by unique id and add a new member
+  Club.findOne({}).then((newMembers) => { //find by id and update? and then $push
+    let newMembers = req.body.members;
+    newMembers.concat(newest_member) //add new member to old list of members
+    //$push operator
+    updatedClub.members = newMembers;
+    updatedClub.save().then((club) => res.send(club));
+  });
+});*/
+
+router.patch("/addmember", (req, res) => {
+  //parameter would need new members list (get old, add new, then patch)
+  const newMembers = Club.findByIdAndUpdate(req.params._id, req.body, {new: true});
+  console.log(req.params);
+  console.log(newMembers);
+  res.send(newMembers)
+});
+
 // LIBRARY APIS
 router.get("/library", (req, res) => {
-  UserLibrary.find({_id: req.user._id}).then((library) => {
+  UserLibrary.find({owner._id: req.user._id}).then((library) => {
     res.send(library);
   });
 });
@@ -78,6 +113,7 @@ router.post("/addbook", (req, res) => {
     title: req.body.title,
     author: req.body.author,
     isbn: req.body.isbn,
+    borrowed: req.body.borrowed,
     location: req.body.location,
     borrowers: req.body.borrowers,
   });
@@ -88,6 +124,21 @@ router.post("/addbook", (req, res) => {
 router.get("/book", (req, res) => { //find specific book details based on id
   Book.find({_id: req.query._id}).then((book) => {
     res.send(book);
+  });
+});
+
+router.post("/borrow", (req, res) => {
+  const newBorrowReq = new BorrowReq({
+    borrower: req.user._id,
+    owner: req.body.owner,
+    bookid: req.body.bookid,
+  });
+  newBorrowReq.save().then((borrowReq) => res.send(borrowReq));
+});
+
+router.get("/inbox", (req, res) => { //find all borrow requests
+  BorrowReq.find({owner._id: req.user._id}).then((response) => { //owner _id = user _id
+    res.send(response);
   });
 });
 
