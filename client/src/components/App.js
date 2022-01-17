@@ -1,6 +1,7 @@
 import React, { Component, useState, useEffect } from "react";
 import { Router } from "@reach/router";
 import NotFound from "./pages/NotFound.js";
+import Landing from "./pages/Landing.js"
 import NavBar from "./modules/NavBar.js"
 import Feed from "./pages/Feed.js";
 import Club from "./pages/Club.js";
@@ -55,14 +56,15 @@ class App extends Component {
           handleLogout={this.handleLogout}
           userId={this.state.userId}
         />
-        /**<div className="App-container">
+        <div className="App-container">
         <Router>
-          <Feed path="/" userId={this.state.userId}/>
+          <Landing path="/" />
+          <Feed path="/shelf/:userid" />
           <Club path="/club/" userId={this.state.userId}  />
-          <Inbox path="/inbox/" userId={this.state.userId}/>
+          <Inbox path="/inbox/" userId={this.state.userId} />
           <NotFound default />
         </Router>
-        </div>*/
+        </div>
       </>
     );
   }
