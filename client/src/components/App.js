@@ -51,10 +51,9 @@ const App = () => {
           userId={this.state.userId}
         />
         <Router>
-        // TODO include new pages here, path goes to different js file ex: profile, book, club, inbox?
-          <Feed path="/" handleLogin={handleLogin} handleLogout={handleLogout} userId={userId} />
-          <Club path="/club" handleLogin={handleLogin} handleLogout={handleLogout} userId={userId} />
-          <Inbox path="/inbox" handleLogin={handleLogin} handleLogout={handleLogout} userId={userId} />
+          <Feed path="/:userId" />
+          <Club path="/club/" userId={this.state.userId}  />
+          <Inbox path="/inbox/" userId={this.state.userId}/>
           <NotFound default />
         </Router>
       </>

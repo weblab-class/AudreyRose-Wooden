@@ -2,20 +2,28 @@ import React, { Component }, { useState } from "react";
 import GoogleLogin, { GoogleLogout } from "react-google-login";
 import SideBar from "./SideBar.js"
 import Card from "../modules/Card.js"
+import { NewBook } from "../modules/NewBookInput.js";
 
 import "../../utilities.css";
 import "./Feed.css";
 
-const Feed = ({ userId, handleLogin, handleLogout }) => {
-  // TODO: retrieve library object, set array
-  const [userLibraryObj, setUserLibraryObj] = useState(undefined);
-  useEffect(() => {
-    get("/api/library").then((library) => {
-      setUserLibraryObj(library);
-      console.log(library);
+vlass Feed extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      books: [],
+    };
+  }
+
+  componentDidMount() {
+    document.title = "My Bookshelf";
+    get("/api/library").then((libraryObjs) => {
+      let reversedLibraryObjs = libraryObjs.reverse();
+      reversedLibraryObjs.map((bookObj) => {
+        this.setState({ books: this.state.books.concat([bookObj]) });
+      });
     });
-  });
-  const userLibrary = userLibraryObj.mybooks;
+  }
 
   // TODO: retrieve profile object
 
@@ -28,11 +36,19 @@ const Feed = ({ userId, handleLogin, handleLogout }) => {
   });
   const user = userObj;
 
+  // this gets called when the user pushes "Submit", so their
+ // book gets added to the screen right away
+ addNewBook = (bookObj) => {
+   this.setState({
+     books: [bookObj].concat(this.state.books),
+   });
+ };
+
   render() {
      let bookList = null;
-     const hasBooks = this.state.mybooks.length !== 0;
+     const hasBooks = this.state.books.length !== 0;
      if (hasBooks) {
-       bookList = this.state.mybooks.map((bookObj) => (
+       bookList = this.state.books.map((bookObj) => (
          <Card // TODO: edit this
            key={`Card_${bookObj._id}`}
            _id={bookObj.props._id}
@@ -50,7 +66,8 @@ const Feed = ({ userId, handleLogin, handleLogout }) => {
      }
      return (
        <>
-
+        {this.props.userId && <NewBook addNewBook={this.addNewBook} />}
+        {bookList}
        </>
      );
    }
