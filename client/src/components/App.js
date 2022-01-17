@@ -57,7 +57,7 @@ const App = () => {
           <NotFound default />
         </Router>
       </>
-    );
+    )
   }
 }
 
