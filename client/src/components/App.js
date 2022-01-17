@@ -3,9 +3,8 @@ import { Router } from "@reach/router";
 import NotFound from "./pages/NotFound.js";
 import NavBar from "./pages/NavBar.js"
 import Feed from "./pages/Feed.js";
-//import SideBar from "./pages/SideBar.js";
-//import Club from "./pages/Club.js";
-//import Inbox from "./pages/Inbox.js";
+import Club from "./pages/Club.js";
+import Inbox from "./pages/Inbox.js";
 
 import "../utilities.css";
 
@@ -42,21 +41,25 @@ const App = () => {
     post("/api/logout");
   };
 
-  // TODO: figure out where to insert NavBar logic
-
-  return (
-    <>
-      <NavBar />
-      <Router>
-      // TODO include new pages here, path goes to different js file ex: profile, book, club, inbox?
-        <Feed path="/" handleLogin={handleLogin} handleLogout={handleLogout} userId={userId} />
-      // <SideBar path="/" handleLogin={handleLogin} handleLogout={handleLogout} userId={userId} />
-      // <Club path="/" handleLogin={handleLogin} handleLogout={handleLogout} userId={userId} />
-      // <Inbox path="/" handleLogin={handleLogin} handleLogout={handleLogout} userId={userId} />
-        <NotFound default />
-      </Router>
-    </>
-  );
-};
+  // TODO: insert NavBar logic
+  render(){
+    return (
+      <>
+        <NavBar
+          handleLogin={this.handleLogin}
+          handleLogout={this.handleLogout}
+          userId={this.state.userId}
+        />
+        <Router>
+        // TODO include new pages here, path goes to different js file ex: profile, book, club, inbox?
+          <Feed path="/" handleLogin={handleLogin} handleLogout={handleLogout} userId={userId} />
+          <Club path="/club" handleLogin={handleLogin} handleLogout={handleLogout} userId={userId} />
+          <Inbox path="/inbox" handleLogin={handleLogin} handleLogout={handleLogout} userId={userId} />
+          <NotFound default />
+        </Router>
+      </>
+    );
+  }
+}
 
 export default App;
