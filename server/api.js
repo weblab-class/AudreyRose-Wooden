@@ -13,6 +13,8 @@ const express = require("express");
 const User = require("./models/user");
 const UserLibrary = require("./models/library");
 const Book = require("./models/book");
+const Club = require("./models/club");
+const BorrowReq = require("./models/borrow");
 
 // import authentication library
 const auth = require("./auth");
@@ -44,6 +46,8 @@ router.post("/initsocket", (req, res) => {
 // | write your API methods below!|
 // |------------------------------|
 
+// TODO: 
+
 // USER APIS
 router.post("/create", (req, res) => {
   const newUser = new User({
@@ -64,6 +68,8 @@ router.get("/profile", (req, res) => {
   });
 });
 
+// TODO: create club and add members POST/GET requests
+
 // LIBRARY APIS
 router.get("/library", (req, res) => {
   UserLibrary.find({_id: req.user._id}).then((library) => {
@@ -78,6 +84,7 @@ router.post("/addbook", (req, res) => {
     title: req.body.title,
     author: req.body.author,
     isbn: req.body.isbn,
+    borrowed: req.body.borrowed,
     location: req.body.location,
     borrowers: req.body.borrowers,
   });
@@ -88,6 +95,14 @@ router.post("/addbook", (req, res) => {
 router.get("/book", (req, res) => { //find specific book details based on id
   Book.find({_id: req.query._id}).then((book) => {
     res.send(book);
+  });
+});
+
+// TODO: borrow books (POST) and Inbox (GET)
+
+router.get("/inbox", (req, res) => { //find all borrow requests
+  BorrowReq.find({owner._id: req.user._id}).then((response) => { //owner _id = user _id
+    res.send(response);
   });
 });
 
