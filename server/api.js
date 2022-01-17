@@ -46,7 +46,7 @@ router.post("/initsocket", (req, res) => {
 // | write your API methods below!|
 // |------------------------------|
 
-// TODO: 
+// TODO: check find for backend functions
 
 // USER APIS
 router.post("/create", (req, res) => {
@@ -68,11 +68,41 @@ router.get("/profile", (req, res) => {
   });
 });
 
-// TODO: create club and add members POST/GET requests
+router.post("/addclub", (req, res) => {
+  const newClub = new Club({
+    admin: req.user._id,
+    members: req.body.members,
+  });
+
+  newClub.save().then((club) => res.send(club));
+});
+
+router.get("/club", (req, res) => { //find a club that requester is part of
+  Club.find({req.user._id: {$in: req.body.members}}).then((club) => {
+    res.send(club);
+  });
+});
+
+/**router.post("/addmember", (req, res) => { //find one club by unique id and add a new member
+  Club.findOne({}).then((newMembers) => { //find by id and update? and then $push
+    let newMembers = req.body.members;
+    newMembers.concat(newest_member) //add new member to old list of members
+    //$push operator
+    updatedClub.members = newMembers;
+    updatedClub.save().then((club) => res.send(club));
+  });
+});*/
+
+router.patch("/addmember", (req, res) => {
+  const newMembers = Club.findByIdAndUpdate(req.params._id, req.body, {new: true});
+  console.log(req.params);
+  console.log(newMembers);
+  res.send(newMembers)
+});
 
 // LIBRARY APIS
 router.get("/library", (req, res) => {
-  UserLibrary.find({_id: req.user._id}).then((library) => {
+  UserLibrary.find({owner._id: req.user._id}).then((library) => {
     res.send(library);
   });
 });
@@ -98,7 +128,15 @@ router.get("/book", (req, res) => { //find specific book details based on id
   });
 });
 
-// TODO: borrow books (POST) and Inbox (GET)
+router.post("/borrow", (req, res) => {
+  const newBorrowReq = new BorrowReq({
+    borrower: req.user._id,
+    owner: req.body.owner,
+    bookid: req.body.bookid,
+  });
+// TODO: logic to update book detail w/ borrowed or not
+  newBorrowReq.save().then((borrowReq) => res.send(borrowReq));
+});
 
 router.get("/inbox", (req, res) => { //find all borrow requests
   BorrowReq.find({owner._id: req.user._id}).then((response) => { //owner _id = user _id
