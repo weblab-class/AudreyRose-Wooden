@@ -10,8 +10,9 @@ const Feed = ({ userId }) => {
   useEffect(() => {
     get("/api/library").then((library) => {
       setUserLibraryObj(library);
+      console.log(library)
     });
-  }
+  });
   const userLibrary = userLibraryObj.mybooks;
 
   return (
@@ -19,7 +20,7 @@ const Feed = ({ userId }) => {
       <div>
       // TODO: handle displaying user's library:
       // components of library == Card: book info
-      
+
       </div>
     </>
   );
