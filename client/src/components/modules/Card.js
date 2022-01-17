@@ -2,9 +2,18 @@ import React, { Component } from "react";
 
 import "../../utilities.css";
 
-// TODO: this file is used to create book cards to populate
+// this file is used to create book cards to populate
 // the user's library on their Feed
 
 // TODO: retrieve individual book details
-get("/api/book")
+const [bookDetails, setBookDetails] = useState(undefined)
+useEffect(() => {
+  get("/api/book").then((response) => {
+    setBookDetails(response);
+    console.log(response);
+  });
+});
+
 // TODO: populate the card
+
+// TODO: decide what props would be for this component
