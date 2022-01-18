@@ -64,7 +64,8 @@ class App extends Component {
          <div className="App-container">
          <Router>
            <MVPlogin path="/" />
-           <Landing path="/landing/:userId" username={this.state.username} />
+           <Landing path="/landing/:userId" username={this.state.username}
+           userId={this.state.userId} />
            <NotFound default />
          </Router>
          </div>
