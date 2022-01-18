@@ -42,7 +42,6 @@ class App extends Component {
       this.setState({ userId: user._id,
                       username: user.name});
       post("/api/initsocket", { socketid: socket.id });
-      // redirectTo("/landing/:userId");
     });
   };
 
@@ -64,9 +63,7 @@ class App extends Component {
         />
          <div className="App-container">
          <Router>
-           <MVPlogin path="/" handleLogin={this.handleLogin}
-                              handleLogout={this.handleLogout}
-                              userId={this.state.userId}/>
+           <MVPlogin path="/" />
            <Landing path="/landing/:userId" username={this.state.username} />
            <NotFound default />
          </Router>

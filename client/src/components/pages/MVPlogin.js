@@ -7,7 +7,7 @@ import "./MVPlogin.css";
 
 const GOOGLE_CLIENT_ID = "479573932126-kfhekcij6o5eg1m3hkefccp58c2ssf2e.apps.googleusercontent.com";
 
-const MVPlogin = ({ userId, handleLogin, handleLogout }) => {
+const MVPlogin = () => {
   return (
     <>
       <div className="u-textCenter">
