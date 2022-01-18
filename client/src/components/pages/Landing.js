@@ -19,7 +19,8 @@ class Landing extends Component {
   componentDidMount() {
     document.title = "My Bookshelf";
     console.log(document.title);
-    get("/api/mybooks", {owner: this.props.userId}).then((libraryObjs) => {
+    let queryId = this.props.userId;
+    get("/api/mybooks", {owner: String(queryId)}).then((libraryObjs) => {
       let reversedLibraryObjs = libraryObjs.reverse();
       reversedLibraryObjs.map((bookObj) => {
         this.setState({ books: this.state.books.concat([bookObj]) });
@@ -40,7 +41,8 @@ class Landing extends Component {
   componentDidUpdate(){
     document.title = "My Bookshelf";
     console.log(document.title);
-    get("/api/mybooks", {owner: this.props.userId}).then((libraryObjs) => {
+    let queryId = this.props.userId;
+    get("/api/mybooks", {owner: String(queryId)}).then((libraryObjs) => {
       let reversedLibraryObjs = libraryObjs.reverse();
       reversedLibraryObjs.map((bookObj) => {
         this.setState({ books: this.state.books.concat([bookObj]) });
