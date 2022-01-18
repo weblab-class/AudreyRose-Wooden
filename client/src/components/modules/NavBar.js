@@ -16,20 +16,16 @@ class NavBar extends Component {
       <nav className="NavBar-container">
         <div className="NavBar-title u-textCenter">GRLLA</div>
         <div className="NavBar-linkContainer u-textCenter">
-          {this.props.userId && (
-            <Link to={`/shelf/${this.props.userId}`} className="NavBar-link">
+          <Link to="/" className="NavBar-link">
             My Shelf
-            </Link>)}
-          {this.props.userId && (
-            <Link to={`/club/${this.props.userId}`} className="NavBar-link">
+          </Link>
+          <Link to="/" className="NavBar-link">
             My Club
-            </Link>)}
-          {this.props.userId && (
-            <Link to="/inbox/" className="NavBar-link">
+          </Link>
+          <Link to="/" className="NavBar-link">
             Inbox
-            </Link>
-          )}
-          /*{this.props.userId ? (
+          </Link>
+          {this.props.userId ? (
             <GoogleLogout
               clientId={GOOGLE_CLIENT_ID}
               buttonText="Logout"
@@ -45,7 +41,7 @@ class NavBar extends Component {
               onFailure={(err) => console.log(err)}
               className="NavBar-link NavBar-login"
             />
-          )}*/
+          )}
         </div>
       </nav>
     );

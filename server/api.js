@@ -54,13 +54,13 @@ router.post("/initsocket", (req, res) => {
 
 // USER APIS
 router.post("/create", (req, res) => {
-  const newUser = new GrllaUser({
+  const newUser = new User({
     name: req.user.name,
     googleid: req.user.googleid,
-    pronouns: req.body.pronouns,
-    location: req.body.location,
-    genres: req.body.genres,
-    current: req.body.current,
+    //pronouns: req.body.pronouns,
+    //location: req.body.location,
+    //genres: req.body.genres,
+    //current: req.body.current,
   });
 
   newUser.save().then((user) => res.send(user));
