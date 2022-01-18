@@ -18,60 +18,34 @@ import { post } from "../../utilities";
 class NewBookInput extends Component {
   constructor(props) {
     super(props);
-
-    this.state = {
-      value: "",
-    };
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.input = React.createRef();
   }
 
-  // called whenever the user types in the new post input box
-  handleChange = (event) => {
-    this.setState({
-      value: event.target.value,
-    });
-  };
-
   // called when the user hits "Submit" for a new post
-  handleSubmit = (event) => {
-    event.preventDefault();
-    this.props.onSubmit && this.props.onSubmit(this.state.value);
-    this.setState({
-      value: "",
-    });
-  };
+  handleSubmit(event) {
+      event.preventDefault();
+      //logic to update values on submit AND make POST request
+    }
 
   render() {
     return (
-      <div className="u-flex"> //populate screen with fields to enter
-        <input //title
-          type="text"
-          placeholder={this.props.defaultTitle}
-          value={this.state.value}
-          onChange={this.handleChange}
-          className="NewBookInput-input"
-        />
-        <input //author
-          type="text"
-          placeholder={this.props.defaultAuthor}
-          value={this.state.value}
-          onChange={this.handleChange}
-          className="NewBookInput-input"
-        />
-        <input //isbn
-          type="text"
-          placeholder={this.props.defaultISBN}
-          value={this.state.value}
-          onChange={this.handleChange}
-          className="NewBookInput-input"
-        />
-        <button
-          type="submit"
-          className="NewBookInput-button u-pointer"
-          value="Submit"
-          onClick={this.handleSubmit}
-        >
-          Add to my Shelf
-        </button>
+      <div className="u-flex">
+        <form onSubmit={this.handleSubmit}>
+        <label>
+          Title:
+          <input type="text" ref={this.input} />
+        </label>
+        <label>
+          Author:
+          <input type="text" ref={this.input} />
+        </label>
+        <label>
+          ISBN:
+          <input type="text" ref={this.input} />
+        </label>
+        <input type="submit" value="Add to my Shelf" />
+      </form>
       </div>
     );
   }
@@ -89,9 +63,9 @@ class NewBookInput extends Component {
 class NewBook extends Component {
   addBook = (value) => {
     const body = {
-      title: value,
-      author: value,
-      isbn: value,
+      title: value.title,
+      author: value.author,
+      isbn: value.isbn,
     };
 
     post("/api/addbook", body).then((book) => {

@@ -1,11 +1,11 @@
 import React, { Component , useState } from "react";
 import GoogleLogin, { GoogleLogout } from "react-google-login";
 import Card from "../modules/Card.js"
-import Profile from "../modules/Profile.js"
 import { NewBook } from "../modules/NewBookInput.js";
 
 import "../../utilities.css";
 import "./Landing.css";
+import { get, post } from "../../utilities";
 
 class Landing extends Component {
   constructor(props) {
@@ -18,28 +18,24 @@ class Landing extends Component {
 
   componentDidMount() {
     document.title = "My Bookshelf";
-<<<<<<< HEAD
     console.log(document.title);
     get("/api/library").then((libraryObjs) => {
       console.log(libraryObjs);
-=======
-    get("/api/library").then((libraryObjs) => {
->>>>>>> f8501d0db3cbd7cea76dd1c007e116ccb359861a
       let reversedLibraryObjs = libraryObjs.reverse();
       reversedLibraryObjs.map((bookObj) => {
         this.setState({ books: this.state.books.concat([bookObj]) });
       });
     });
 
-    get("/api/profile").then((userObj) => { //retrieve profile object
-      if (userObj._id) {
-        // they are registed in the database, and currently logged in.
-        this.setState({
-          userId: userObj._id,
-          username: userObj.name,
-        });
-      }
-    });
+    // get("/api/profile").then((userObj) => { //retrieve profile object
+    //   if (userObj._id) {
+    //     // they are registed in the database, and currently logged in.
+    //     this.setState({
+    //       userId: userObj._id,
+    //       username: userObj.name,
+    //     });
+    //   }
+    // });
   }
 
   // this gets called when the user pushes "Submit", so their
@@ -57,11 +53,11 @@ class Landing extends Component {
        bookList = this.state.books.map((bookObj) => (
          <Card // TODO: edit this
            key={`Card_${bookObj._id}`}
-           _id={bookObj.props._id}
-           owner={bookObj.props.owner}
-           title={bookObj.props.title}
-           author={bookObj.props.author}
-           isbn={bookObj.props.isbn}
+           _id={bookObj._id}
+           owner={bookObj.owner}
+           title={bookObj.title}
+           author={bookObj.author}
+           isbn={bookObj.isbn}
            userId={this.props.userId}
          />
        ));
@@ -70,11 +66,6 @@ class Landing extends Component {
      }
      return (
        <>
-<<<<<<< HEAD
-        // <Profile />
-=======
-        <Profile />
->>>>>>> f8501d0db3cbd7cea76dd1c007e116ccb359861a
         <div>
           {this.props.userId && <NewBook addNewBook={this.addNewBook} />}
           {bookList}

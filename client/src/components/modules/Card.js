@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import NewBook from "./NewBookInput.js"
 
 import "../../utilities.css";
 
@@ -14,8 +15,6 @@ import "../../utilities.css";
  * @param {string} title
  * @param {string} author of the story
  * @param {string} isbn
- * @param {boolean} borrowed
- * @param {string} location user who has it now
  */
 
 class Card extends Component {
@@ -35,14 +34,12 @@ class Card extends Component {
     return(
       <div>
       //html to parse book details from props
-        <BookDetails
+        <Card
           _id={this.props._id}
           owner={this.props.owner}
           title={this.props.title}
           author={this.props.author}
           isbn={this.props.isbn}
-          borrowed={this.props.borrowed}
-          location={this.props.location}
         />
       </div>
     );

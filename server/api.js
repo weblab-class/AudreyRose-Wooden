@@ -106,15 +106,15 @@ router.patch("/addmember", (req, res) => {
 
 // LIBRARY APIS
 router.get("/library", (req, res) => {
-  //UserLibrary.find({owner._id: req.user._id}).then((library) => {
-  //  res.send(library);
-  //});
+  UserLibrary.find({owner: req.user}).then((library) => {
+   res.send(library);
+  });
 });
 
 // BOOK APIS
 router.post("/addbook", (req, res) => {
   const newBook = new Book({
-    owner: req.body.owner,
+    owner: req.user,
     title: req.body.title,
     author: req.body.author,
     isbn: req.body.isbn,
