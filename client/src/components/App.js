@@ -56,15 +56,16 @@ class App extends Component {
           handleLogout={this.handleLogout}
           userId={this.state.userId}
         />
+        /*
         <div className="App-container">
         <Router>
-          <Landing path="/" />
-          <Feed path="/shelf/:userid" />
-          <Club path="/club/" userId={this.state.userId}  />
-          <Inbox path="/inbox/" userId={this.state.userId} />
+          <Landing path="/" /> //describe the product, login, and create a user
+          <Feed path="/shelf/:userid" /> //populates the users profile and library
+          <Club path="/club/" userId={this.state.userId}  /> //shows the book club where user is admin
+          <Inbox path="/inbox/" userId={this.state.userId} /> //shows borrow requests sent to the user
           <NotFound default />
         </Router>
-        </div>
+        </div> */
       </>
     );
   }

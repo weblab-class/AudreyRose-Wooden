@@ -11,6 +11,7 @@ const express = require("express");
 
 // import models so we can interact with the database
 const User = require("./models/user");
+const GrllaUser = require("./models/grllaUser");
 const UserLibrary = require("./models/library");
 const Book = require("./models/book");
 const Club = require("./models/club");
@@ -53,9 +54,9 @@ router.post("/initsocket", (req, res) => {
 
 // USER APIS
 router.post("/create", (req, res) => {
-  const newUser = new User({
-    username: req.body.name,
-    googleid: req.body.googleid,
+  const newUser = new GrllaUser({
+    name: req.user.name,
+    googleid: req.user.googleid,
     pronouns: req.body.pronouns,
     location: req.body.location,
     genres: req.body.genres,
@@ -66,7 +67,7 @@ router.post("/create", (req, res) => {
 });
 
 router.get("/profile", (req, res) => {
-  User.find({_id: req.user._id}).then((profile) => {
+  User.find({googleid: req.user.googleid}).then((profile) => {
     res.send(profile);
   });
 });
@@ -81,7 +82,7 @@ router.post("/addclub", (req, res) => {
 });
 
 router.get("/club", (req, res) => { //find a club that requester is part of
-  //Club.find({req.user._id: {$in: req.body.members}}).then((club) => {
+  //Club.find({req.user: {$in: req.body.members}}).then((club) => {
   //  res.send(club);
   //});
 });
@@ -106,9 +107,9 @@ router.patch("/addmember", (req, res) => {
 
 // LIBRARY APIS
 router.get("/library", (req, res) => {
-  //UserLibrary.find({owner._id: req.user._id}).then((library) => {
-  //  res.send(library);
-  //});
+  UserLibrary.find({owner: req.user}).then((library) => {
+    res.send(library);
+  });
 });
 
 // BOOK APIS
@@ -127,7 +128,7 @@ router.post("/addbook", (req, res) => {
 });
 
 router.get("/book", (req, res) => { //find specific book details based on id
-  Book.find({_id: req.query._id}).then((book) => {
+  Book.find({isbn: req.query.isbn}).then((book) => {
     res.send(book);
   });
 });
@@ -142,9 +143,9 @@ router.post("/borrow", (req, res) => {
 });
 
 router.get("/inbox", (req, res) => { //find all borrow requests
-  //BorrowReq.find({owner._id: req.user._id}).then((response) => { //owner _id = user _id
-  //  res.send(response);
-  //});
+  BorrowReq.find({owner: req.user}).then((response) => { //owner _id = user _id
+    res.send(response);
+  });
 });
 
 // anything else falls to this "not found" case

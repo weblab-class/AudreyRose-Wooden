@@ -17,6 +17,9 @@ class Feed extends Component {
 
   componentDidMount() {
     document.title = "My Bookshelf";
+    console.log("component mounted");
+    //if signed in, retrieve books -- otherwise,
+    //get profile, to set googleid to get library
     get("/api/library").then((libraryObjs) => {
       let reversedLibraryObjs = libraryObjs.reverse();
       reversedLibraryObjs.map((bookObj) => {

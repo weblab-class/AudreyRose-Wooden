@@ -8,6 +8,25 @@ const GOOGLE_CLIENT_ID = "479573932126-kfhekcij6o5eg1m3hkefccp58c2ssf2e.apps.goo
 
 const Landing = ({ userId, handleLogin, handleLogout }) => {
 
+  // TODO: create user form to fill out if new user:
+  //hey! you're new here, tell us about yourself
+  //otherwise, if grllaUser (diff from googleUser) exists, send them to Feed.js
+
+  // called whenever the user types in the new post input box
+  handleChange = (event) => {
+    this.setState({
+      value: event.target.value,
+    });
+  };
+
+  // called when the user hits "Submit" for a new post
+  handleSubmit = (event) => {
+    event.preventDefault();
+    this.props.onSubmit && this.props.onSubmit(this.state.value);
+    this.setState({
+      value: "",
+    });
+  };
 
   return (
     <>
@@ -16,23 +35,35 @@ const Landing = ({ userId, handleLogin, handleLogout }) => {
         <h2>Insert here a description of GRLLA as a product</h2>
       </div>
       <div>
-        {this.props.userId ? (
-          <GoogleLogout
-            clientId={GOOGLE_CLIENT_ID}
-            buttonText="Logout"
-            onLogoutSuccess={this.props.handleLogout}
-            onFailure={(err) => console.log(err)}
-            className="NavBar-link NavBar-login"
-          />
-        ) : (
-          <GoogleLogin //if login successful --> show input boxes to create user
-            clientId={GOOGLE_CLIENT_ID}
-            buttonText="Login"
-            onSuccess={this.props.handleLogin}
-            onFailure={(err) => console.log(err)}
-            className="NavBar-link NavBar-login"
-          />
-        )}
+      <input //title
+        type="text"
+        placeholder={this.props.defaultTitle}
+        value={this.state.value}
+        onChange={this.handleChange}
+        className="NewBookInput-input"
+      />
+      <input //author
+        type="text"
+        placeholder={this.props.defaultAuthor}
+        value={this.state.value}
+        onChange={this.handleChange}
+        className="NewBookInput-input"
+      />
+      <input //isbn
+        type="text"
+        placeholder={this.props.defaultISBN}
+        value={this.state.value}
+        onChange={this.handleChange}
+        className="NewBookInput-input"
+      />
+      <button
+        type="submit"
+        className="NewBookInput-button u-pointer"
+        value="Submit"
+        onClick={this.handleSubmit}
+      >
+      Click me!
+      </button>
       </div>
     </>
   );
