@@ -86,16 +86,6 @@ router.get("/club", (req, res) => { //find a club that requester is part of
   //});
 });
 
-/**router.post("/addmember", (req, res) => { //find one club by unique id and add a new member
-  Club.findOne({}).then((newMembers) => { //find by id and update? and then $push
-    let newMembers = req.body.members;
-    newMembers.concat(newest_member) //add new member to old list of members
-    //$push operator
-    updatedClub.members = newMembers;
-    updatedClub.save().then((club) => res.send(club));
-  });
-});*/
-
 router.patch("/addmember", (req, res) => {
   //parameter would need new members list (get old, add new, then patch)
   const newMembers = Club.findByIdAndUpdate(req.params._id, req.body, {new: true});
@@ -105,9 +95,8 @@ router.patch("/addmember", (req, res) => {
 });
 
 // LIBRARY APIS
-router.get("/library", (req, res) => {
-  //UserLibrary.find({owner: req.user._id}).then((library) => {
-  UserLibrary.find({owner: "61e5dbb2a93eaf5e94e999ae"}).then((library) => {
+router.get("/library", (req, res) => { //find all books where
+  UserLibrary.find({owner: String(req.user)}).then((library) => {
    res.send(library);
   });
 });

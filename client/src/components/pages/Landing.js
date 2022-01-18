@@ -38,13 +38,26 @@ class Landing extends Component {
     // });
   }
 
+  componentDidUpdate(){
+    document.title = "My Bookshelf 2";
+    console.log(document.title);
+    get("/api/library").then((libraryObjs) => {
+      console.log(libraryObjs);
+      let reversedLibraryObjs = libraryObjs.reverse();
+      reversedLibraryObjs.map((bookObj) => {
+        this.setState({ books: this.state.books.concat([bookObj]) });
+      });
+    });
+  }
+
   // this gets called when the user pushes "Submit", so their
  // book gets added to the screen right away
  addNewBook = (bookObj) => {
-   console.log(bookObj);
+   console.log("books: " + this.state.books);
    this.setState({
      books: [bookObj].concat(this.state.books),
    });
+   console.log("made it here");
  };
 
   render() {
