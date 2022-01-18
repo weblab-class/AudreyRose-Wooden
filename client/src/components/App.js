@@ -5,7 +5,11 @@ import GoogleLogin, { GoogleLogout } from "react-google-login";
 import NotFound from "./pages/NotFound.js";
 import NavBar from "./modules/NavBar.js"
 import MVPlogin from "./pages/MVPlogin.js";
+<<<<<<< HEAD
 import Landing from "./pages/Landing.js"
+=======
+import Inbox from "./pages/Inbox.js";
+>>>>>>> f8501d0db3cbd7cea76dd1c007e116ccb359861a
 
 import "../utilities.css";
 
@@ -61,6 +65,7 @@ class App extends Component {
           userId={this.state.userId}
           username={this.state.username}
         />
+<<<<<<< HEAD
          <div className="App-container">
          <Router>
            <MVPlogin path="/" handleLogin={this.handleLogin}
@@ -70,6 +75,16 @@ class App extends Component {
            <NotFound default />
          </Router>
          </div>
+=======
+        <div className="App-container">
+        <Router>
+          <MVPlogin path="/" />
+          <Landing path="/shelf/:userid" />
+          // <Inbox path="/inbox/" userId={this.state.userId} />
+          <NotFound default />
+        </Router>
+        </div>
+>>>>>>> f8501d0db3cbd7cea76dd1c007e116ccb359861a
       </>
     );
   }
