@@ -1,5 +1,5 @@
 import React, { Component, useState, useEffect } from "react";
-import { Router } from "@reach/router";
+import { Router, navigate } from "@reach/router";
 import GoogleLogin, { GoogleLogout } from "react-google-login";
 
 import NotFound from "./pages/NotFound.js";
@@ -48,11 +48,12 @@ class App extends Component {
 
   handleLogout = () => {
     this.setState({ userId: undefined, username: undefined }); //this function is not defined
-    // redirectTo("/")
+    navigate("/");
     post("/api/logout");
   };
 
   render() {
+
     return (
       <>
         <NavBar
