@@ -13,40 +13,32 @@ class NavBar extends Component {
   //include: My Shelf, My Clubs (eventually a dropdown), Inbox, login/out
   render() {
     return(
-      <nav className="NavBar-container">
+      <nav className="NavBar-container u-textCenter">
         <div className="NavBar-title u-textCenter">GRLLA</div>
-        <div className="NavBar-linkContainer u-textCenter">
-          {this.props.userId && (
-            <Link to={`/shelf/${this.props.userId}`} className="NavBar-link">
-            My Shelf
-            </Link>)}
-          {this.props.userId && (
-            <Link to={`/club/${this.props.userId}`} className="NavBar-link">
-            My Club
-            </Link>)}
-          {this.props.userId && (
-            <Link to="/inbox/" className="NavBar-link">
-            Inbox
-            </Link>
-          )}
-          {this.props.userId ? (
+        {this.props.userId ? (
+          //get name from api endpoint
+          <>
+            <div className="NavBar-welcome u-inlineBlock">Hi there, {this.props.username}!</div>
+            <Link to={`/landing/${this.props.userId}`} className="NavBar-link u-inlineBlock">My Shelf</Link>
             <GoogleLogout
               clientId={GOOGLE_CLIENT_ID}
               buttonText="Logout"
               onLogoutSuccess={this.props.handleLogout}
               onFailure={(err) => console.log(err)}
-              className="NavBar-link NavBar-login"
+              className="NavBar-link NavBar-login u-inlineBlock"
             />
+            </>
           ) : (
+            <>
             <GoogleLogin
               clientId={GOOGLE_CLIENT_ID}
               buttonText="Login"
               onSuccess={this.props.handleLogin}
               onFailure={(err) => console.log(err)}
-              className="NavBar-link NavBar-login"
+              className="NavBar-link NavBar-login u-inlineBlock"
             />
+            </>
           )}
-        </div>
       </nav>
     );
   }

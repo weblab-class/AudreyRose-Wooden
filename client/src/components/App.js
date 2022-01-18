@@ -1,11 +1,11 @@
 import React, { Component, useState, useEffect } from "react";
 import { Router } from "@reach/router";
+import GoogleLogin, { GoogleLogout } from "react-google-login";
+
 import NotFound from "./pages/NotFound.js";
-import Landing from "./pages/Landing.js"
 import NavBar from "./modules/NavBar.js"
-import Feed from "./pages/Feed.js";
-import Club from "./pages/Club.js";
-import Inbox from "./pages/Inbox.js";
+import MVPlogin from "./pages/MVPlogin.js";
+import Landing from "./pages/Landing.js"
 
 import "../utilities.css";
 
@@ -22,6 +22,7 @@ class App extends Component {
    super(props);
    this.state = {
      userId: undefined,
+     username: undefined,
    };
  }
 
@@ -38,13 +39,16 @@ class App extends Component {
     console.log(`Logged in as ${res.profileObj.name}`);
     const userToken = res.tokenObj.id_token;
     post("/api/login", { token: userToken }).then((user) => {
-      setUserId(user._id);
+      this.setState({ userId: user._id,
+                      username: user.name});
       post("/api/initsocket", { socketid: socket.id });
+      // redirectTo("/landing/:userId");
     });
   };
 
   handleLogout = () => {
-    setUserId(undefined);
+    this.setState({ userId: undefined, username: undefined }); //this function is not defined
+    // redirectTo("/")
     post("/api/logout");
   };
 
@@ -55,16 +59,17 @@ class App extends Component {
           handleLogin={this.handleLogin}
           handleLogout={this.handleLogout}
           userId={this.state.userId}
+          username={this.state.username}
         />
-        <div className="App-container">
-        <Router>
-          <Landing path="/" />
-          <Feed path="/shelf/:userid" />
-          <Club path="/club/" userId={this.state.userId}  />
-          <Inbox path="/inbox/" userId={this.state.userId} />
-          <NotFound default />
-        </Router>
-        </div>
+         <div className="App-container">
+         <Router>
+           <MVPlogin path="/" handleLogin={this.handleLogin}
+                              handleLogout={this.handleLogout}
+                              userId={this.state.userId}/>
+           <Landing path="/landing/:userId" username={this.state.username} />
+           <NotFound default />
+         </Router>
+         </div>
       </>
     );
   }

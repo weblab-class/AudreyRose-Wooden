@@ -30,3 +30,9 @@
 .NavBar-link + .NavBar-link {
   margin-left: var(--m);
 }
+
+.NavBar-welcome {
+  margin-right: var(--l);
+  color: var(--white);
+  text-decoration: none;
+}
