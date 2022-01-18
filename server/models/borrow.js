@@ -1,8 +1,14 @@
 const mongoose = require("mongoose");
 
 const BorrowSchema = new mongoose.Schema({
-  borrower: String, //sending request from, unique user id
-  owner: String, //sending request to, unique user id
+  borrower: {
+    name: String,
+    googleid: String,
+    }, //sending request from, unique user id
+  owner: {
+    name: String,
+    googleid: String,
+    }, //sending request to, unique user id
   bookid: String,
 });
 

@@ -5,8 +5,8 @@ const BookSchema = new mongoose.Schema({
   title: String,
   author: String,
   isbn: String,
-  borrowed: Boolean, //currently borrowed T/F
-  location: String, //user who has it right now
+  // borrowed: Boolean, //currently borrowed T/F
+  // location: String, //user who has it right now
   //borrowers: [ObjectId], //array of user ids who have borrowed
 });
 

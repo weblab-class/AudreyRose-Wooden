@@ -56,24 +56,24 @@ router.post("/create", (req, res) => {
   const newUser = new User({
     username: req.body.name,
     googleid: req.body.googleid,
-    pronouns: req.body.pronouns,
-    location: req.body.location,
-    genres: req.body.genres,
-    current: req.body.current,
+    // pronouns: req.body.pronouns,
+    // location: req.body.location,
+    // genres: req.body.genres,
+    // current: req.body.current,
   });
 
   newUser.save().then((user) => res.send(user));
 });
 
 router.get("/profile", (req, res) => {
-  User.find({_id: req.user._id}).then((profile) => {
+  User.find({googleid: req.user.googleid}).then((profile) => {
     res.send(profile);
   });
 });
 
 router.post("/addclub", (req, res) => {
   const newClub = new Club({
-    admin: req.user._id,
+    admin: req.user,
     members: req.body.members,
   });
 
@@ -118,8 +118,8 @@ router.post("/addbook", (req, res) => {
     title: req.body.title,
     author: req.body.author,
     isbn: req.body.isbn,
-    borrowed: req.body.borrowed,
-    location: req.body.location,
+    // borrowed: req.body.borrowed,
+    // location: req.body.location,
 //    borrowers: req.body.borrowers,
   });
 
@@ -127,14 +127,14 @@ router.post("/addbook", (req, res) => {
 });
 
 router.get("/book", (req, res) => { //find specific book details based on id
-  Book.find({_id: req.query._id}).then((book) => {
+  Book.find({isbn: req.query.isbn}).then((book) => {
     res.send(book);
   });
 });
 
 router.post("/borrow", (req, res) => {
   const newBorrowReq = new BorrowReq({
-    borrower: req.user._id,
+    borrower: req.user,
     owner: req.body.owner,
     bookid: req.body.bookid,
   });
@@ -142,9 +142,9 @@ router.post("/borrow", (req, res) => {
 });
 
 router.get("/inbox", (req, res) => { //find all borrow requests
-  //BorrowReq.find({owner._id: req.user._id}).then((response) => { //owner _id = user _id
-  //  res.send(response);
-  //});
+  BorrowReq.find({owner: req.user}).then((response) => { //owner _id = user _id
+    res.send(response);
+  });
 });
 
 // anything else falls to this "not found" case
