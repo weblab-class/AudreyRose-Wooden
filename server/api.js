@@ -106,7 +106,8 @@ router.patch("/addmember", (req, res) => {
 
 // LIBRARY APIS
 router.get("/library", (req, res) => {
-  UserLibrary.find({owner: req.user}).then((library) => {
+  //UserLibrary.find({owner: req.user._id}).then((library) => {
+  UserLibrary.find({owner: "61e5dbb2a93eaf5e94e999ae"}).then((library) => {
    res.send(library);
   });
 });

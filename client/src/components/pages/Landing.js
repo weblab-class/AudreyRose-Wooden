@@ -41,6 +41,7 @@ class Landing extends Component {
   // this gets called when the user pushes "Submit", so their
  // book gets added to the screen right away
  addNewBook = (bookObj) => {
+   console.log(bookObj);
    this.setState({
      books: [bookObj].concat(this.state.books),
    });
