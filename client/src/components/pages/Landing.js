@@ -19,8 +19,7 @@ class Landing extends Component {
   componentDidMount() {
     document.title = "My Bookshelf";
     console.log(document.title);
-    get("/api/library").then((libraryObjs) => {
-      console.log(libraryObjs);
+    get("/api/mybooks").then((libraryObjs) => {
       let reversedLibraryObjs = libraryObjs.reverse();
       reversedLibraryObjs.map((bookObj) => {
         this.setState({ books: this.state.books.concat([bookObj]) });
@@ -39,10 +38,9 @@ class Landing extends Component {
   }
 
   componentDidUpdate(){
-    document.title = "My Bookshelf 2";
+    document.title = "My Bookshelf";
     console.log(document.title);
-    get("/api/library").then((libraryObjs) => {
-      console.log(libraryObjs);
+    get("/api/mybooks").then((libraryObjs) => {
       let reversedLibraryObjs = libraryObjs.reverse();
       reversedLibraryObjs.map((bookObj) => {
         this.setState({ books: this.state.books.concat([bookObj]) });

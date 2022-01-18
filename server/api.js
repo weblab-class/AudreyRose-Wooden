@@ -52,7 +52,7 @@ router.post("/initsocket", (req, res) => {
 // TODO: fix the find filtering, cannnot read properties of undefined (reading '_id')
 
 // USER APIS
-router.post("/create", (req, res) => {
+router.post("/createuser", (req, res) => {
   const newUser = new User({
     username: req.body.name,
     googleid: req.body.googleid,
@@ -95,10 +95,33 @@ router.patch("/addmember", (req, res) => {
 });
 
 // LIBRARY APIS
-router.get("/library", (req, res) => { //find all books where
+router.post("/createlib", (req, res) => { //create a new UserLib, first book add
+  const newLib = new UserLibrary({
+    owner: req.user,
+    mybooks: req.body.books,
+  });
+
+  newLib.save().then((lib) => res.send(lib));
+});
+
+router.get("/library", (req, res) => { //retrieve UserLib
   UserLibrary.find({owner: String(req.user)}).then((library) => {
    res.send(library);
   });
+});
+
+router.get("/mybooks", (req, res) => { //find all books where owner is user
+  console.log("user: " + String(req.user));
+  Book.find({owner: String(req.user)}).then((booklist) => {
+   res.send(booklist);
+  });
+});
+
+router.patch("/morebooks", (req, res) => { //add new book to exisitng UserLib
+  const newBooks = UserLibrary.findByIdAndUpdate(req.params._id, req.body, {new: true});
+  console.log(req.params);
+  console.log(newBooks);
+  res.send(newBooks)
 });
 
 // BOOK APIS

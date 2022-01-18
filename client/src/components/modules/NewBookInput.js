@@ -85,10 +85,13 @@ class NewBookInput extends Component {
  */
 class NewBook extends Component {
 
+  //check if library is empty for user (GET)
+  //if empty: createlib (POST) and add book to it (PATCH)
+  //otherwise: add book (PATCH) to user lib
+
   addBook = (value) => {
     //only the title field is added
     const body = value;
-    console.log("function value: " + value);
 
     post("/api/addbook", value).then((book) => {
       // display this book on the screen
