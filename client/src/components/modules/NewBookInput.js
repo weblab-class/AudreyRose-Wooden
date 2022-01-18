@@ -3,8 +3,6 @@ import React, { Component } from "react";
 import "./NewBookInput.css";
 import { post } from "../../utilities";
 
-// TODO: CHANGE parameters for new book input
-
 /**
  * New Book is a parent component for all input components
  *
@@ -25,7 +23,7 @@ class NewBookInput extends Component {
   // called when the user hits "Submit" for a new post
   handleSubmit(event) {
       event.preventDefault();
-      //logic to update values on submit AND make POST request
+      //TODO: logic to update values on submit AND make POST request
     }
 
   render() {
@@ -51,9 +49,9 @@ class NewBookInput extends Component {
   }
 }
 
-// TODO: edit these parameters
+
 /**
- * New Story is a New Post component for comments
+ * New Book is a New Post component for books
  *
  * Proptypes
  * @param {string} defaultTitle

@@ -18,6 +18,8 @@
 const validator = require("./validator");
 validator.checkSetup();
 
+require('dotenv').config();
+
 //import libraries needed for the webserver to work!
 const http = require("http");
 const express = require("express"); // backend framework for our node server.
@@ -33,7 +35,7 @@ const socketManager = require("./server-socket");
 
 // Server configuration below
 // TODO change connection URL after setting up your team database
-const mongoConnectionURL = "mongodb+srv://admin:456S8Sbr2VXrRvb@cluster0.j6ths.mongodb.net/grllaDatabase?retryWrites=true&w=majority";
+const mongoConnectionURL = process.env.ATLAS_SRV;
 const databaseName = "grllaDatabase";
 
 // connect to mongodb
@@ -56,7 +58,7 @@ app.use(express.json());
 // set up a session, which will persist login data across requests
 app.use(
   session({
-    secret: "session-secret",
+    secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
   })
@@ -94,7 +96,7 @@ app.use((err, req, res, next) => {
 });
 
 // hardcode port to 3000 for now
-const port = 3000;
+const port = process.env.PORT || 3000;
 const server = http.Server(app);
 socketManager.init(server);
 
