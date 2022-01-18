@@ -13,10 +13,6 @@ import "./Profile.css";
  * @param {string} _id of the story
  * @param {string} name
  * @param {string} googleid
- * @param {string} pronouns
- * @param {string} location
- * @param {array} genres
- * @param {string} current currently reading
  */
 
 class Profile extends Component {
@@ -36,16 +32,6 @@ class Profile extends Component {
     return(
       <div>
       // TODO: populate the SIDEBAR
-      /**
-        <BookDetails
-          _id={this.props._id}
-          owner={this.props.owner}
-          title={this.props.title}
-          author={this.props.author}
-          isbn={this.props.isbn}
-          borrowed={this.props.borrowed}
-          location={this.props.location}
-        />*/
         This is a profile.
       </div>
     );

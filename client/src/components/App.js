@@ -3,8 +3,7 @@ import { Router } from "@reach/router";
 import NotFound from "./pages/NotFound.js";
 import Landing from "./pages/Landing.js"
 import NavBar from "./modules/NavBar.js"
-import Feed from "./pages/Feed.js";
-import Club from "./pages/Club.js";
+import MVPlogin from "./pages/MVPlogin.js";
 import Inbox from "./pages/Inbox.js";
 
 import "../utilities.css";
@@ -58,10 +57,9 @@ class App extends Component {
         />
         <div className="App-container">
         <Router>
-          <Landing path="/" />
-          <Feed path="/shelf/:userid" />
-          <Club path="/club/" userId={this.state.userId}  />
-          <Inbox path="/inbox/" userId={this.state.userId} />
+          <MVPlogin path="/" />
+          <Landing path="/shelf/:userid" />
+          // <Inbox path="/inbox/" userId={this.state.userId} />
           <NotFound default />
         </Router>
         </div>

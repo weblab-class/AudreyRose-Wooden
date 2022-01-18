@@ -95,7 +95,7 @@ class NewBook extends Component {
     };
 
     post("/api/addbook", body).then((book) => {
-      // display this story on the screen
+      // display this book on the screen
       this.props.addNewBook(book);
     });
   };
