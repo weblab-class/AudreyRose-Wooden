@@ -19,6 +19,7 @@ const MVPlogin = ({ userId, handleLogin, handleLogout }) => {
         <li>input details to add a book to your shelf</li>
         <li>logout to return to this screen</li>
       </ul>
+      <h4>bugs for MVP that weren't fixed before deadline: add book makes successful post request but the page crashes, GET books for user works but I'm not properly setting query string in Landing.js</h4>
       </div>
     </>
   );
