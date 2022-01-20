@@ -24,7 +24,16 @@ class Card extends Component {
   // declare state varibales and JS calculations
   // TODO: retrieve individual book details
   componentDidMount() {
-    get("/api/book").then((book) => {
+    console.log("component mounted Card.js");
+    get("/api/book", {isbn: this.props.isbn}).then((book) => {
+      setBookDetails(book);
+      console.log(book);
+    });
+  }
+
+  componentDidUpdate() {
+    console.log("component updated Card.js");
+    get("/api/book", {isbn: this.props.isbn}).then((book) => {
       setBookDetails(book);
       console.log(book);
     });

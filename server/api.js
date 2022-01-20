@@ -95,34 +95,27 @@ router.patch("/addmember", (req, res) => {
 });
 
 // LIBRARY APIS
-router.post("/createlib", (req, res) => { //create a new UserLib, first book add
-  const newLib = new UserLibrary({
-    owner: req.user,
-    mybooks: req.body.books,
-  });
-
-  newLib.save().then((lib) => res.send(lib));
+router.get("/mybooks", (req, res) => { //find all books where owner is user
+  // Book.find({owner: "61e72042b793520023e6c715"}).then((booklist) => {
+  Book.find({owner: String(req.user._id)}).then((booklist) => {
+   res.send(booklist);
+ }, (err) => {
+   console.log("maybe its an error: ", err);
+ });
 });
 
-router.get("/library", (req, res) => { //retrieve UserLib
-  UserLibrary.find({owner: String(req.user)}).then((library) => {
+router.get("/allbooks", (req, res) => { //find all books where owner is user
+  Book.find({}).then((booklist) => {
+   res.send(booklist);
+ }, (err) => {
+   console.log("maybe its an error: ", err);
+ });
+});
+
+router.get("/library", (req, res) => { //retrieve books of a different user
+  Book.find({owner: String(req.query.userId)}).then((library) => {
    res.send(library);
   });
-});
-
-router.get("/mybooks", (req, res) => { //find all books where owner is user
-  Book.find({owner: "61e72042b793520023e6c715"}).then((booklist) => {
-  // Book.find({owner: String(req.user)}).then((booklist) => {
-  // Book.find({owner: String(req.query.userId)}).then((booklist) => {
-   res.send(booklist);
-  });
-});
-
-router.patch("/morebooks", (req, res) => { //add new book to exisitng UserLib
-  const newBooks = UserLibrary.findByIdAndUpdate(req.params._id, req.body, {new: true});
-  console.log(req.params);
-  console.log(newBooks);
-  res.send(newBooks)
 });
 
 // BOOK APIS
@@ -132,9 +125,6 @@ router.post("/addbook", (req, res) => {
     title: req.body.title,
     author: req.body.author,
     isbn: req.body.isbn,
-    // borrowed: req.body.borrowed,
-    // location: req.body.location,
-//    borrowers: req.body.borrowers,
   });
 
   newBook.save().then((book) => res.send(book));

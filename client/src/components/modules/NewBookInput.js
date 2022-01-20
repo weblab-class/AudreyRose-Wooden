@@ -95,6 +95,7 @@ class NewBook extends Component {
 
     post("/api/addbook", value).then((book) => {
       // display this book on the screen
+      console.log("book value in addBook() NewBookInput.js: " + String(book));
       this.props.addNewBook(book);
     });
   };

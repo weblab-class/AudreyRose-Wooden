@@ -19,13 +19,15 @@ class Landing extends Component {
   componentDidMount() {
     document.title = "My Bookshelf";
     let queryId = this.props.userId;
-    console.log("mounted: " + queryId);
-    get("/api/mybooks", {owner: String(queryId)}).then((libraryObjs) => {
-      let reversedLibraryObjs = libraryObjs.reverse();
-      reversedLibraryObjs.map((bookObj) => {
-        this.setState({ books: this.state.books.concat([bookObj]) });
-      });
-    });
+    console.log("component mounted Landing.js");
+    // // get("/api/mybooks", {owner: String(queryId)}).then((libraryObjs) => {
+    // get("/api/mybooks").then((libraryObjs) => {
+    // // get("/api/allbooks").then((libraryObjs) => {
+    //   let reversedLibraryObjs = libraryObjs.reverse();
+    //   reversedLibraryObjs.map((bookObj) => {
+    //     this.setState({ books: this.state.books.concat([bookObj]) });
+    //   });
+    // });
 
     // get("/api/profile").then((userObj) => { //retrieve profile object
     //   if (userObj._id) {
@@ -39,24 +41,15 @@ class Landing extends Component {
   }
 
   componentDidUpdate(){
-    document.title = "My Bookshelf";
-    let queryId = this.props.userId;
-    console.log("mounted: " + queryId);
-    get("/api/mybooks", {owner: String(queryId)}).then((libraryObjs) => {
-      let reversedLibraryObjs = libraryObjs.reverse();
-      reversedLibraryObjs.map((bookObj) => {
-        this.setState({ books: this.state.books.concat([bookObj]) });
-      });
-    });
+    console.log("component updated Landing.js");
   }
 
   // this gets called when the user pushes "Submit", so their
  // book gets added to the screen right away
  addNewBook = (bookObj) => {
    console.log("books: " + this.state.books);
-   this.setState({
-     books: [bookObj].concat(this.state.books),
-   });
+   console.log("[bookObj to be concat]: " + String(bookObj));
+   this.setState({books: [bookObj].concat(this.state.books)});
    console.log("made it here");
  };
 
@@ -65,7 +58,7 @@ class Landing extends Component {
      const hasBooks = this.state.books.length !== 0;
      if (hasBooks) {
        bookList = this.state.books.map((bookObj) => (
-         <Card // TODO: edit this
+         <Card
            key={`Card_${bookObj._id}`}
            _id={bookObj._id}
            owner={bookObj.owner}
