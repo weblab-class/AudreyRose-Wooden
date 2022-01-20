@@ -31,17 +31,9 @@ class Card extends Component {
     });
   }
 
-  componentDidUpdate() {
-    console.log("component updated Card.js");
-    get("/api/book", {isbn: this.props.isbn}).then((book) => {
-      setBookDetails(book);
-      console.log(book);
-    });
-  }
-
   render(){
     return(
-      <div>
+      <div className="Card-container">
       //html to parse book details from props
         <Card
           _id={this.props._id}

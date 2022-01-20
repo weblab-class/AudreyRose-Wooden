@@ -18,16 +18,15 @@ class Landing extends Component {
 
   componentDidMount() {
     document.title = "My Bookshelf";
-    let queryId = this.props.userId;
+    // let queryId = this.props.userId;
     console.log("component mounted Landing.js");
-    // // get("/api/mybooks", {owner: String(queryId)}).then((libraryObjs) => {
-    // get("/api/mybooks").then((libraryObjs) => {
-    // // get("/api/allbooks").then((libraryObjs) => {
-    //   let reversedLibraryObjs = libraryObjs.reverse();
-    //   reversedLibraryObjs.map((bookObj) => {
-    //     this.setState({ books: this.state.books.concat([bookObj]) });
-    //   });
-    // });
+    // get("/api/mybooks", {owner: String(queryId)}).then((libraryObjs) => {
+    get("/api/mybooks").then((libraryObjs) => {
+      let reversedLibraryObjs = libraryObjs.reverse();
+      reversedLibraryObjs.map((bookObj) => {
+        this.setState({ books: this.state.books.concat([bookObj]) });
+      });
+    });
 
     // get("/api/profile").then((userObj) => { //retrieve profile object
     //   if (userObj._id) {
@@ -48,8 +47,9 @@ class Landing extends Component {
  // book gets added to the screen right away
  addNewBook = (bookObj) => {
    console.log("books: " + this.state.books);
-   console.log("[bookObj to be concat]: " + String(bookObj));
-   this.setState({books: [bookObj].concat(this.state.books)});
+   console.log("[bookObj to be concat]: " + String(bookObj.title));
+   console.log("my book list: " + {books: [bookObj].concat(this.state.books)}) //this looks fine
+   this.setState({books: [bookObj].concat(this.state.books)});  //is it not setting the state?
    console.log("made it here");
  };
 

@@ -47,7 +47,6 @@ class NewBookInput extends Component {
         isbn:this.state.isbn,
       };
       this.props.onSubmit && this.props.onSubmit(bookDetails);
-      //TODO: logic to update values on submit AND make POST request
 
     }
 
@@ -90,10 +89,9 @@ class NewBook extends Component {
   //otherwise: add book (PATCH) to user lib
 
   addBook = (value) => {
-    //only the title field is added
     const body = value;
 
-    post("/api/addbook", value).then((book) => {
+    post("/api/addbook", body).then((book) => {
       // display this book on the screen
       console.log("book value in addBook() NewBookInput.js: " + String(book));
       this.props.addNewBook(book);
