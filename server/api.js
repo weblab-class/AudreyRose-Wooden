@@ -111,9 +111,9 @@ router.get("/library", (req, res) => { //retrieve UserLib
 });
 
 router.get("/mybooks", (req, res) => { //find all books where owner is user
-  // Book.find({owner: "61e63884f441b70f04db1648"}).then((booklist) => {
+  Book.find({owner: "61e72042b793520023e6c715"}).then((booklist) => {
   // Book.find({owner: String(req.user)}).then((booklist) => {
-  Book.find({owner: String(req.query.userId)}).then((booklist) => {
+  // Book.find({owner: String(req.query.userId)}).then((booklist) => {
    res.send(booklist);
   });
 });

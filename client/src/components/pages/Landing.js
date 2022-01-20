@@ -18,8 +18,8 @@ class Landing extends Component {
 
   componentDidMount() {
     document.title = "My Bookshelf";
-    console.log(document.title);
     let queryId = this.props.userId;
+    console.log("mounted: " + queryId);
     get("/api/mybooks", {owner: String(queryId)}).then((libraryObjs) => {
       let reversedLibraryObjs = libraryObjs.reverse();
       reversedLibraryObjs.map((bookObj) => {
@@ -40,8 +40,8 @@ class Landing extends Component {
 
   componentDidUpdate(){
     document.title = "My Bookshelf";
-    console.log(document.title);
     let queryId = this.props.userId;
+    console.log("mounted: " + queryId);
     get("/api/mybooks", {owner: String(queryId)}).then((libraryObjs) => {
       let reversedLibraryObjs = libraryObjs.reverse();
       reversedLibraryObjs.map((bookObj) => {
