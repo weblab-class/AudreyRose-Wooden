@@ -34,9 +34,17 @@ class Card extends Component {
   render(){
     return(
       <div className="Card-container">
+<<<<<<< HEAD
           <div className="Card-bookTitle">{this.props.title}</div>
           <div className="Card-bookDetails">{this.props.author}</div>
           <div className="Card-bookDetails">{this.props.isbn}</div>
+=======
+          {this.props._id}
+          {this.props.owner}
+          {this.props.title}
+          {this.props.author}
+          {this.props.isbn}
+>>>>>>> 643a6f2c3eb373f0be9e22af761d9df0346274a6
       </div>
     );
   }
