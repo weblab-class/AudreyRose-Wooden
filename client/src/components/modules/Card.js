@@ -25,23 +25,20 @@ class Card extends Component {
   // TODO: retrieve individual book details
   componentDidMount() {
     console.log("component mounted Card.js");
-    get("/api/book", {isbn: this.props.isbn}).then((book) => {
-      setBookDetails(book);
-      console.log(book);
-    });
+    // get("/api/book", {isbn: this.props.isbn}).then((book) => {
+    //   setBookDetails(book);
+    //   console.log(book);
+    // });
   }
 
   render(){
     return(
       <div className="Card-container">
-      //html to parse book details from props
-        <Card
-          _id={this.props._id}
-          owner={this.props.owner}
-          title={this.props.title}
-          author={this.props.author}
-          isbn={this.props.isbn}
-        />
+          {this.props._id}
+          {this.props.owner}
+          {this.props.title}
+          {this.props.author}
+          {this.props.isbn}
       </div>
     );
   }

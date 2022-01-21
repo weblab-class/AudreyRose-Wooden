@@ -97,12 +97,9 @@ router.patch("/addmember", (req, res) => {
 // LIBRARY APIS
 router.get("/mybooks", (req, res) => { //find all books where owner is user
   // Book.find({owner: "61e72042b793520023e6c715"}).then((booklist) => {
-  console.log("in the get request"); //not being logged
   Book.find({owner: String(req.user._id)}).then((booklist) => {
-    console.log(`you have ${bookList.length} number of books added`); //not being logged
-   res.send(booklist);
- }, (err) => {
-   console.log("maybe its an error: ", err);
+    console.log(booklist);
+   res.send({bookList: booklist});
  });
 });
 
