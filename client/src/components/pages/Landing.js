@@ -22,10 +22,8 @@ class Landing extends Component {
     console.log("component mounted Landing.js");
     // get("/api/mybooks", {owner: String(queryId)}).then((libraryObjs) => {
     get("/api/mybooks").then((libraryObjs) => {
-      let reversedLibraryObjs = libraryObjs.reverse();
-      reversedLibraryObjs.map((bookObj) => {
-        this.setState({ books: this.state.books.concat([bookObj]) });
-      });
+      console.log(libraryObjs.bookList);
+        this.setState(() => {return { books: libraryObjs.bookList }});
     });
 
     // get("/api/profile").then((userObj) => { //retrieve profile object
@@ -68,13 +66,14 @@ class Landing extends Component {
            userId={this.props.userId}
          />
        ));
+        // bookList = <div>Not Empty library!</div>;
      } else {
        bookList = <div>Empty library!</div>;
      }
      return (
        <>
         <div>
-          {this.props.userId && <NewBook addNewBook={this.addNewBook} />}
+           {this.props.userId && <NewBook addNewBook={this.addNewBook} />}
           {bookList}
         </div>
        </>
