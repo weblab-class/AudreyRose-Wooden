@@ -60,15 +60,15 @@ class Landing extends Component {
            userId={this.props.userId}
          />
        ));
-        // bookList = <div>Not Empty library!</div>;
      } else {
        bookList = <div>Empty library!</div>;
      }
      return (
        <>
-        <div>
-           {this.props.userId && <NewBook addNewBook={this.addNewBook} />}
-          {bookList}
+        <div>{this.props.userId && <NewBook addNewBook={this.addNewBook} />}</div>
+        <div className="landing-container u-textCenter">
+          <div className="profile">profile goes here!</div>
+          <div className="library">{bookList}</div>
         </div>
        </>
      );

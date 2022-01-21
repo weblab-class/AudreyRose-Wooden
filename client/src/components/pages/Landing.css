@@ -1,0 +1,19 @@
+.landing-container{
+  padding: 20px;
+}
+
+.profile {
+  width: 29%;
+  background-color: grey;
+  float: left;
+}
+
+.library {
+  width: 70%;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  grid-gap: 5px;
+  background-color: darkgrey;
+  overflow-y: auto;
+  float: right;
+}
