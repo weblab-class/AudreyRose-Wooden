@@ -18,9 +18,7 @@ class Landing extends Component {
 
   componentDidMount() {
     document.title = "My Bookshelf";
-    // let queryId = this.props.userId;
     console.log("component mounted Landing.js");
-    // get("/api/mybooks", {owner: String(queryId)}).then((libraryObjs) => {
     get("/api/mybooks").then((libraryObjs) => {
       console.log(libraryObjs.bookList);
         this.setState(() => {return { books: libraryObjs.bookList }});
@@ -35,10 +33,6 @@ class Landing extends Component {
     //     });
     //   }
     // });
-  }
-
-  componentDidUpdate(){
-    console.log("component updated Landing.js");
   }
 
   // this gets called when the user pushes "Submit", so their
