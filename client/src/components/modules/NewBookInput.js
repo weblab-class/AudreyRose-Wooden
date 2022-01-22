@@ -26,7 +26,6 @@ class NewBookInput extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-// TODO: install and test out Formik for new books
   handleInputChange(event){
     const target = event.target;
     const value = target.value;
@@ -47,6 +46,7 @@ class NewBookInput extends Component {
         isbn:this.state.isbn,
       };
       this.props.onSubmit && this.props.onSubmit(bookDetails);
+      // TODO: clear inputs after submit
 
     }
 

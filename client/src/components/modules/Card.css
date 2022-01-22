@@ -1,7 +1,8 @@
 .Card-container {
-  border: var(--darkgrey) 1px solid;
+  border: var(--white) 1px solid;
   border-radius: var(--xs);
   margin-top: var(--m);
+  background-color: darkgrey;
 }
 
 .Card-container:first-of-type {
@@ -14,6 +15,6 @@
 }
 
 .Card-bookDetails {
-  font-size: 40px;
+  font-size: 15px;
   margin: var(--s) 0 0;
 }

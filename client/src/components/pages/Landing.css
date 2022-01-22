@@ -1,9 +1,13 @@
 .landing-container{
   padding: 20px;
+  height: 100%;
+  position: absolute;
 }
 
 .profile {
   width: 29%;
+  height: 100%;
+  position: absolute;
   background-color: grey;
   float: left;
 }
@@ -13,7 +17,6 @@
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   grid-gap: 5px;
-  background-color: darkgrey;
   overflow-y: auto;
   float: right;
 }

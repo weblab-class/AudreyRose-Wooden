@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import NewBook from "./NewBookInput.js"
 
 import "../../utilities.css";
+import "./Card.css";
 
 // this file is used to create book cards to populate
 // the user's library on their Feed
