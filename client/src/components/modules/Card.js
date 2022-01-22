@@ -1,8 +1,12 @@
 import React, { Component } from "react";
-import NewBook from "./NewBookInput.js"
+import { Router, Link } from "@reach/router";
+import NewBook from "./NewBookInput.js";
 
 import "../../utilities.css";
 import "./Card.css";
+
+import BookDetails from "../pages/BookDetails.js"
+
 
 // this file is used to create book cards to populate
 // the user's library on their Feed
@@ -33,12 +37,18 @@ class Card extends Component {
   }
 
   render(){
+    const myISBN = this.props.isbn;
+
     return(
       <div className="Card-container">
-          <div className="Card-bookTitle">{this.props.title}</div>
+          <Link to={"/book"} isbn={myISBN} className="Card-bookTitle">{this.props.title}</Link>
           <div className="Card-bookDetails">{this.props.author}</div>
           <div className="Card-bookDetails">{this.props.isbn}</div>
           <div>------</div>
+
+          <Router>
+            <BookDetails path="/book" isbn={this.props.isbn}/>
+          </Router>
       </div>
     );
   }

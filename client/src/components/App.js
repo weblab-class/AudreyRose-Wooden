@@ -6,6 +6,7 @@ import NotFound from "./pages/NotFound.js";
 import NavBar from "./modules/NavBar.js"
 import MVPlogin from "./pages/MVPlogin.js";
 import Landing from "./pages/Landing.js"
+import BookDetails from "./pages/BookDetails.js"
 
 import "../utilities.css";
 
@@ -66,6 +67,7 @@ class App extends Component {
            <MVPlogin path="/" />
            <Landing path="/landing/:userId" username={this.state.username}
            userId={this.state.userId} />
+           <BookDetails path="/book" />
            <NotFound default />
          </Router>
          </div>

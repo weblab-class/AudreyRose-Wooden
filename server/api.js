@@ -98,7 +98,6 @@ router.patch("/addmember", (req, res) => {
 router.get("/mybooks", (req, res) => { //find all books where owner is user
   // Book.find({owner: "61e72042b793520023e6c715"}).then((booklist) => {
   Book.find({owner: String(req.user._id)}).then((booklist) => {
-    console.log(booklist);
    res.send({bookList: booklist});
  });
 });
@@ -129,7 +128,7 @@ router.post("/addbook", (req, res) => {
   newBook.save().then((book) => res.send(book));
 });
 
-router.get("/book", (req, res) => { //find specific book details based on id
+router.get("/book", (req, res) => { //find specific book details based on isbn
   Book.find({isbn: req.query.isbn}).then((book) => {
     res.send(book);
   });
