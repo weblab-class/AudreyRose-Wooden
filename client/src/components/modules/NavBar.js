@@ -20,7 +20,7 @@ class NavBar extends Component {
           <>
             <div className="NavBar-welcome u-inlineBlock">Hi there, {this.props.username}!</div>
             <Link to={`/landing/${this.props.userId}`} className="NavBar-link u-inlineBlock">My Shelf</Link>
-            <Link to={"/club"} className="NavBar-link u-inlineBlock">My BookClub</Link>
+            <Link to={"/clubs"} className="NavBar-link u-inlineBlock">My BookClub</Link>
             <GoogleLogout
               clientId={GOOGLE_CLIENT_ID}
               buttonText="Logout"

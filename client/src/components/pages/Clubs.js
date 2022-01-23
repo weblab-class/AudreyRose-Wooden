@@ -19,10 +19,10 @@ class Clubs extends Component {
   componentDidMount() {
     document.title = "My BookClubs";
     console.log("component mounted Clubs.js");
-    get("/api/club").then((myClubs) => {
-      console.log(myClubs.members);
-        this.setState(() => {return { members: myClubs.members }});
-    });
+    // get("/api/club").then((myClubs) => {
+    //   console.log(myClubs.members);
+    //   this.setState(() => {return { members: myClubs.members }});
+    // });
   }
 
   // this gets called when the user pushes "Submit", so their
