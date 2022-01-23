@@ -45,7 +45,7 @@ class Card extends Component {
 
     return(
       <div className="Card-container">
-          <Link to={"/book"} isbn={myISBN} className="Card-bookTitle">{this.props.title}</Link>
+          <Link to={"/book/"+myISBN} isbn={myISBN} className="Card-bookTitle">{this.props.title}</Link>
           <div className="Card-bookDetails">{this.props.author}</div>
           <div className="Card-bookDetails">{this.props.isbn}</div>
           <div>------</div>

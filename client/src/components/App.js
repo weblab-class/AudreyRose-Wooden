@@ -25,6 +25,7 @@ class App extends Component {
    this.state = {
      userId: undefined,
      username: undefined,
+     isbnProp: "",
    };
  }
 
@@ -68,7 +69,7 @@ class App extends Component {
            <MVPlogin path="/" />
            <Landing path="/landing/:userId" username={this.state.username}
            userId={this.state.userId} />
-           <BookDetails path="/book" />
+           <BookDetails path="/book/:isbn" isbn={this.state.isbnProp}/>
            <Clubs path="/clubs" />
            <NotFound default />
          </Router>

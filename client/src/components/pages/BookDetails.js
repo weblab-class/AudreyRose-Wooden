@@ -17,7 +17,12 @@ import { get, post } from "../../utilities";
 class BookDetails extends Component {
   constructor(props) {
     super(props); //this.props.isbn
-    console.log("my props: " + this.props.isbn);
+    this.state = {
+      bookName: "",
+      bookAuthor: "",
+      bookDescription: undefined,
+      bookCover: undefined,
+    }
   }
 
   componentDidMount() {
@@ -36,7 +41,7 @@ class BookDetails extends Component {
     return(
       <div>
         This is a book.
-        {String(this.props)}
+        {String(this.props.isbn)}
       </div>
     );
   }
