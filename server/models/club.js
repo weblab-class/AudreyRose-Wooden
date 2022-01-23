@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 
 const ClubSchema = new mongoose.Schema({
   admin: String, //unique user id, creator of club
+  name: String,
   members: [String], //array of user ids --> members of club
 });
 

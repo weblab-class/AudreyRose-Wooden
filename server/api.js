@@ -49,22 +49,8 @@ router.post("/initsocket", (req, res) => {
 // | write your API methods below!|
 // |------------------------------|
 
-// TODO: fix the find filtering, cannnot read properties of undefined (reading '_id')
 
 // USER APIS
-router.post("/createuser", (req, res) => {
-  const newUser = new User({
-    username: req.body.name,
-    googleid: req.body.googleid,
-    // pronouns: req.body.pronouns,
-    // location: req.body.location,
-    // genres: req.body.genres,
-    // current: req.body.current,
-  });
-
-  newUser.save().then((user) => res.send(user));
-});
-
 router.get("/profile", (req, res) => {
   User.find({googleid: req.user.googleid}).then((profile) => {
     res.send(profile);
@@ -80,33 +66,17 @@ router.post("/addclub", (req, res) => {
   newClub.save().then((club) => res.send(club));
 });
 
-router.get("/club", (req, res) => { //find a club that requester is part of
-  //Club.find({req.user._id: {$in: req.body.members}}).then((club) => {
-  //  res.send(club);
-  //});
-});
-
-router.patch("/addmember", (req, res) => {
-  //parameter would need new members list (get old, add new, then patch)
-  const newMembers = Club.findByIdAndUpdate(req.params._id, req.body, {new: true});
-  console.log(req.params);
-  console.log(newMembers);
-  res.send(newMembers)
+router.get("/club", (req, res) => { //find a club that requester is admin of
+  // Club.find({req.user._id: {$in: req.body.members}}).then((club) => {
+  Club.find({admin: String(req.user._id)}).then((club) => {
+   res.send(club);
+  });
 });
 
 // LIBRARY APIS
 router.get("/mybooks", (req, res) => { //find all books where owner is user
-  // Book.find({owner: "61e72042b793520023e6c715"}).then((booklist) => {
   Book.find({owner: String(req.user._id)}).then((booklist) => {
    res.send({bookList: booklist});
- });
-});
-
-router.get("/allbooks", (req, res) => { //find all books where owner is user
-  Book.find({}).then((booklist) => {
-   res.send(booklist);
- }, (err) => {
-   console.log("maybe its an error: ", err);
  });
 });
 

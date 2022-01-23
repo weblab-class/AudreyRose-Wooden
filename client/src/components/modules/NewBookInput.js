@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 
-import "./NewBookInput.css";
 import { post } from "../../utilities";
 import "../../utilities.css";
 
