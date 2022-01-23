@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, useState } from "react";
 import { Router, Link } from "@reach/router";
 import NewBook from "./NewBookInput.js";
 
@@ -25,6 +25,9 @@ import BookDetails from "../pages/BookDetails.js"
 class Card extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      ISBN: this.props.isbn,
+    }
   }
   // declare state varibales and JS calculations
   // TODO: retrieve individual book details
@@ -37,7 +40,8 @@ class Card extends Component {
   }
 
   render(){
-    const myISBN = this.props.isbn;
+    console.log(this.state.ISBN);
+    const myISBN = this.state.ISBN;
 
     return(
       <div className="Card-container">

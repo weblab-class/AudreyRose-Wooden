@@ -86,6 +86,12 @@ router.get("/library", (req, res) => { //retrieve books of a different user
   });
 });
 
+router.get("/global-library", (req, res) => { //retrieve all books
+  Book.find({}).then((globalLib) => {
+   res.send({bookList: globalLib});
+  });
+});
+
 // BOOK APIS
 router.post("/addbook", (req, res) => {
   const newBook = new Book({

@@ -3,3 +3,12 @@
   height: 100%;
   position: absolute;
 }
+
+.clubs-library {
+  width: 90%;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-gap: 5px;
+  overflow-y: auto;
+  float: none;
+}

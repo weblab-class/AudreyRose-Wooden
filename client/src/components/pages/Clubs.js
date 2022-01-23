@@ -13,6 +13,7 @@ class Clubs extends Component {
     this.state = {
       clubname: "",
       members: [],
+      books: [],
     };
   }
 
@@ -23,6 +24,10 @@ class Clubs extends Component {
     //   console.log(myClubs.members);
     //   this.setState(() => {return { members: myClubs.members }});
     // });
+    get("/api/global-library").then((libraryObjs) => {
+      console.log(libraryObjs.bookList);
+        this.setState(() => {return { books: libraryObjs.bookList }});
+    });
   }
 
   // this gets called when the user pushes "Submit", so their
@@ -38,18 +43,41 @@ class Clubs extends Component {
  };
 
   render() {
-     let memberList = null;
-     const hasMembers = this.state.members.length !== 0;
-     if (hasMembers) {
-       memberList = this.state.members
+    //club members
+     // let memberList = null;
+     // const hasMembers = this.state.members.length !== 0;
+     // if (hasMembers) {
+     //   memberList = this.state.members
+     // } else {
+     //   memberList = <div>No Members!</div>;
+     // }
+
+     //books
+     let bookList = null;
+     const hasBooks = this.state.books.length !== 0;
+     if (hasBooks) {
+       bookList = this.state.books.map((bookObj) => (
+         <Card
+           key={`Card_${bookObj._id}`}
+           _id={bookObj._id}
+           owner={bookObj.owner}
+           title={bookObj.title}
+           author={bookObj.author}
+           isbn={bookObj.isbn}
+           userId={this.props.userId}
+         />
+       ));
      } else {
-       memberList = <div>No Members!</div>;
+       bookList = <div>Empty library!</div>;
      }
+
+
      return (
        <>
         <div>{this.props.userId && <NewClub addNewClub={this.addNewClub} />}</div>
         <div className="clubs-container u-textCenter">
-          <div>{memberList}</div>
+          {/*<div>{memberList}</div>*/}
+          <div className="clubs-library">{bookList}</div>
         </div>
        </>
      );
