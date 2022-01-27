@@ -12,11 +12,12 @@ const MVPlogin = () => {
     <>
       <div className="u-textCenter">
       <h1>GRLLA is a community-focused guerrilla book-lending space</h1>
-      <h2>Guide for our project (milestone 2)</h2>
+      <h2>Guide for our project (final submission)</h2>
       <ul>
         <li>login and logout via GoogleLogin</li>
         <li>navigate to 'My Shelf' to access your personal library</li>
         <li>input details to add a book to your shelf</li>
+        <li>navigate to 'Global Library' to see the joint library across all users</li>
         <li>logout to return to this screen</li>
       </ul>
       </div>
