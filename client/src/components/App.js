@@ -67,10 +67,10 @@ class App extends Component {
          <div className="App-container">
          <Router>
            <MVPlogin path="/" />
-           <Landing path="/landing/:userId" username={this.state.username}
+           <Landing path="/shelf/:userId" username={this.state.username}
            userId={this.state.userId} />
            <BookDetails path="/book/:isbn" isbn={this.state.isbnProp}/>
-           <Clubs path="/clubs" />
+           <Clubs path="/library" />
            <NotFound default />
          </Router>
          </div>

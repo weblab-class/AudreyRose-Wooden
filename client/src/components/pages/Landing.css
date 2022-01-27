@@ -4,19 +4,11 @@
   position: absolute;
 }
 
-.profile {
-  width: 29%;
-  height: 100%;
-  position: absolute;
-  border: 3px solid grey;
-  float: left;
-}
-
 .library {
-  width: 70%;
+  width: 100%;
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  grid-gap: 5px;
+  grid-gap: 10px;
   overflow-y: auto;
   float: right;
 }

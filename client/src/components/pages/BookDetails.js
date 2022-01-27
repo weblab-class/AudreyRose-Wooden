@@ -20,7 +20,6 @@ class BookDetails extends Component {
     this.state = {
       bookName: "",
       bookAuthor: "",
-      bookDescription: undefined,
       bookCover: undefined,
     }
   }
@@ -28,19 +27,24 @@ class BookDetails extends Component {
   componentDidMount() {
     const myISBN = this.props.isbn;
     console.log("my isbn: "+ myISBN);
-    get("/api/book", {isbn: myISBN}).then((book) => { //the ISBN is coming back undefined
-      // setBookDetails(book);
-      console.log(book); //should I set the details as a state?
+    get("/api/book", {isbn: myISBN}).then((book) => {
+      this.setState({
+        bookName: book.title,
+        bookAuthor: book.author,
+      });
     });
   }
 
 
   render(){
 
+    const imgSrcLink = "https://covers.openlibrary.org/b/isbn/"+this.props.isbn+"-m.jpg?default=false";
 
     return(
       <div>
-        This is a book.
+        <img src={imgSrcLink} />
+        <div className="Details-bookTitle">{this.state.bookName}</div>
+        <div className="Details-bookDetails">{this.state.bookAuthor}</div>
         {String(this.props.isbn)}
       </div>
     );

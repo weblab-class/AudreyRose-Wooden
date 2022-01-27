@@ -18,21 +18,9 @@ class Landing extends Component {
 
   componentDidMount() {
     document.title = "My Bookshelf";
-    console.log("component mounted Landing.js");
     get("/api/mybooks").then((libraryObjs) => {
-      console.log(libraryObjs.bookList);
         this.setState(() => {return { books: libraryObjs.bookList }});
     });
-
-    // get("/api/profile").then((userObj) => { //retrieve profile object
-    //   if (userObj._id) {
-    //     // they are registed in the database, and currently logged in.
-    //     this.setState({
-    //       userId: userObj._id,
-    //       username: userObj.name,
-    //     });
-    //   }
-    // });
   }
 
   // this gets called when the user pushes "Submit", so their
@@ -63,7 +51,6 @@ class Landing extends Component {
        <>
         <div>{this.props.userId && <NewBook addNewBook={this.addNewBook} />}</div>
         <div className="landing-container u-textCenter">
-          <div className="profile">profile goes here!</div>
           <div className="library">{bookList}</div>
         </div>
        </>

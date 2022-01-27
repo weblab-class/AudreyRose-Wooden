@@ -51,27 +51,27 @@ router.post("/initsocket", (req, res) => {
 
 
 // USER APIS
-router.get("/profile", (req, res) => {
-  User.find({googleid: req.user.googleid}).then((profile) => {
-    res.send(profile);
-  });
-});
+// router.get("/profile", (req, res) => {
+//   User.find({googleid: req.user.googleid}).then((profile) => {
+//     res.send(profile);
+//   });
+// });
 
-router.post("/addclub", (req, res) => {
-  const newClub = new Club({
-    admin: req.user,
-    members: req.body.members,
-  });
+// router.post("/addclub", (req, res) => {
+//   const newClub = new Club({
+//     admin: req.user,
+//     members: req.body.members,
+//   });
+//
+//   newClub.save().then((club) => res.send(club));
+// });
 
-  newClub.save().then((club) => res.send(club));
-});
-
-router.get("/club", (req, res) => { //find a club that requester is admin of
-  // Club.find({req.user._id: {$in: req.body.members}}).then((club) => {
-  Club.find({admin: String(req.user._id)}).then((club) => {
-   res.send(club);
-  });
-});
+// router.get("/club", (req, res) => { //find a club that requester is admin of
+//   // Club.find({req.user._id: {$in: req.body.members}}).then((club) => {
+//   Club.find({admin: String(req.user._id)}).then((club) => {
+//    res.send(club);
+//   });
+// });
 
 // LIBRARY APIS
 router.get("/mybooks", (req, res) => { //find all books where owner is user
@@ -80,11 +80,11 @@ router.get("/mybooks", (req, res) => { //find all books where owner is user
  });
 });
 
-router.get("/library", (req, res) => { //retrieve books of a different user
-  Book.find({owner: String(req.query.userId)}).then((library) => {
-   res.send(library);
-  });
-});
+// router.get("/library", (req, res) => { //retrieve books of a different user
+//   Book.find({owner: String(req.query.userId)}).then((library) => {
+//    res.send(library);
+//   });
+// });
 
 router.get("/global-library", (req, res) => { //retrieve all books
   Book.find({}).then((globalLib) => {
@@ -110,20 +110,20 @@ router.get("/book", (req, res) => { //find specific book details based on isbn
   });
 });
 
-router.post("/borrow", (req, res) => {
-  const newBorrowReq = new BorrowReq({
-    borrower: req.user,
-    owner: req.body.owner,
-    bookid: req.body.bookid,
-  });
-  newBorrowReq.save().then((borrowReq) => res.send(borrowReq));
-});
+// router.post("/borrow", (req, res) => {
+//   const newBorrowReq = new BorrowReq({
+//     borrower: req.user,
+//     owner: req.body.owner,
+//     bookid: req.body.bookid,
+//   });
+//   newBorrowReq.save().then((borrowReq) => res.send(borrowReq));
+// });
 
-router.get("/inbox", (req, res) => { //find all borrow requests
-  BorrowReq.find({owner: req.user}).then((response) => { //owner _id = user _id
-    res.send(response);
-  });
-});
+// router.get("/inbox", (req, res) => { //find all borrow requests
+//   BorrowReq.find({owner: req.user}).then((response) => { //owner _id = user _id
+//     res.send(response);
+//   });
+// });
 
 // anything else falls to this "not found" case
 router.all("*", (req, res) => {

@@ -2,7 +2,7 @@
   border: var(--white) 1px solid;
   border-radius: var(--xs);
   margin-top: var(--m);
-  background-color: darkgrey;
+  background-color: #C4A484;
 }
 
 .Card-container:first-of-type {
@@ -16,5 +16,10 @@
 
 .Card-bookDetails {
   font-size: 15px;
+  margin: var(--s) 0 0;
+}
+
+.Card-bookISBN {
+  font-size: 10px;
   margin: var(--s) 0 0;
 }

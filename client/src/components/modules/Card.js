@@ -29,26 +29,21 @@ class Card extends Component {
       ISBN: this.props.isbn,
     }
   }
-  // declare state varibales and JS calculations
-  // TODO: retrieve individual book details
+
   componentDidMount() {
-    console.log("component mounted Card.js");
-    // get("/api/book", {isbn: this.props.isbn}).then((book) => {
-    //   setBookDetails(book);
-    //   console.log(book);
-    // });
   }
 
   render(){
-    console.log(this.state.ISBN);
     const myISBN = this.state.ISBN;
+
+    const imgSrcLink = "https://covers.openlibrary.org/b/isbn/"+myISBN+"-m.jpg?default=false";
 
     return(
       <div className="Card-container">
-          <Link to={"/book/"+myISBN} isbn={myISBN} className="Card-bookTitle">{this.props.title}</Link>
+          <img src={imgSrcLink} />
+          <div className="Card-bookTitle">{this.props.title}</div>
           <div className="Card-bookDetails">{this.props.author}</div>
-          <div className="Card-bookDetails">{this.props.isbn}</div>
-          <div>------</div>
+          <div className="Card-bookISBN">ISBN: {this.props.isbn}</div>
 
           <Router>
             <BookDetails path="/book" isbn={this.props.isbn}/>
