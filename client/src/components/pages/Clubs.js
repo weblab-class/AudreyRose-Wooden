@@ -1,7 +1,6 @@
 import React, { Component , useState } from "react";
 import GoogleLogin, { GoogleLogout } from "react-google-login";
 import Card from "../modules/Card.js"
-import { NewClub } from "../modules/NewClubInput.js";
 
 import "../../utilities.css";
 import "./Clubs.css";
